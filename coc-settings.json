@@ -1,0 +1,15 @@
+{
+    "prettier.tabWidth": 4,
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    "prettier.trailingComma": "es5",
+    "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "vue"],
+    "html.autoClosingTags": true,
+    "html.filetypes": [
+        "html",
+        "handlebars",
+        "htmldjango",
+        "vue",
+        "vue-html"
+    ]
+}
