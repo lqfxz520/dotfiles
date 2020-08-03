@@ -84,7 +84,9 @@ let g:coc_global_extensions=[
     \ 'coc-tsserver',
     \ 'coc-vetur',
     \ 'coc-prettier',
-    \ 'coc-html'
+    \ 'coc-html',
+    \ 'coc-emmet',
+    \ 'coc-explorer'
  \ ]
 
 if exists('+termguicolors')
@@ -125,9 +127,9 @@ colorscheme gruvbox
 set background=dark
 
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
 
 if executable('rg')
     let g:rg_derive_root='true'
@@ -156,11 +158,12 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+" nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nmap <leader>pv :CocCommand explorer --toggle<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <Leader>pf :Files<CR>
-nnoremap <Leader><CR> :so ~/personalConfig/nvim/init.vim<CR>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>
