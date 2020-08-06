@@ -86,7 +86,9 @@ let g:coc_global_extensions=[
     \ 'coc-prettier',
     \ 'coc-html',
     \ 'coc-emmet',
-    \ 'coc-explorer'
+    \ 'coc-explorer',
+    \ 'coc-translator',
+    \ 'coc-highlight'
  \ ]
 
 if exists('+termguicolors')
@@ -127,7 +129,7 @@ colorscheme gruvbox
 set background=dark
 
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
 
@@ -214,6 +216,8 @@ function! s:select_current_word()
     endif
     return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
 endfunc
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " vim TODO
 nmap <Leader>tu <Plug>BujoChecknormal

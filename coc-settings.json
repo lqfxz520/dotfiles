@@ -11,5 +11,7 @@
         "htmldjango",
         "vue",
         "vue-html"
-    ]
+    ],
+    "coc.preferences.colorSupport": false,
+    "highlight.document.enable": true
 }
