@@ -3,7 +3,7 @@
     "prettier.singleQuote": true,
     "prettier.semi": false,
     "prettier.trailingComma": "es5",
-    "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "vue"],
+    "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"],
     "html.autoClosingTags": true,
     "html.filetypes": [
         "html",
@@ -12,6 +12,5 @@
         "vue",
         "vue-html"
     ],
-    "coc.preferences.colorSupport": false,
-    "highlight.document.enable": true
+    "coc.preferences.colorSupport": false
 }

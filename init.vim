@@ -36,8 +36,8 @@ set autoindent      " Use same indenting on new lines
 set smartindent     " Smart autoindenting on new lines
 set clipboard=unnamedplus
 set showmatch           " Jump to matching bracket
-set matchpairs+=<:>     " Add HTML brackets to pair matching
-set matchtime=1         " Tenths of a second to show the matching paren
+" set matchpairs+=<:>     " Add HTML brackets to pair matching
+" set matchtime=1         " Tenths of a second to show the matching paren
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -64,7 +64,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
-Plug 'ryanoasis/vim-devicons'
 
 
 Plug 'gruvbox-community/gruvbox'
@@ -79,7 +78,6 @@ Plug 'hardcoreplayers/oceanic-material'
 
 call plug#end()
 let g:coc_global_extensions=[
-    \ 'coc-ember',
     \ 'coc-json',
     \ 'coc-tsserver',
     \ 'coc-vetur',
@@ -88,7 +86,6 @@ let g:coc_global_extensions=[
     \ 'coc-emmet',
     \ 'coc-explorer',
     \ 'coc-translator',
-    \ 'coc-highlight'
  \ ]
 
 if exists('+termguicolors')
@@ -217,7 +214,7 @@ function! s:select_current_word()
     return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
 endfunc
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " vim TODO
 nmap <Leader>tu <Plug>BujoChecknormal
@@ -249,4 +246,6 @@ augroup END
 
 autocmd BufWritePre * :call TrimWhitespace()
 
-
+if has('nvim')
+    set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
+endif
