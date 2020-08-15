@@ -69,6 +69,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
+Plug 'terryma/vim-multiple-cursors'
+
 
 
 Plug 'gruvbox-community/gruvbox'
@@ -134,6 +136,8 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 0
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
+
+" let g:multi_cursor_quit_key = '<C-c>'
 
 if executable('rg')
     let g:rg_derive_root='true'
