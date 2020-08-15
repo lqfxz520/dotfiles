@@ -35,9 +35,14 @@ set noshowmode
 set autoindent      " Use same indenting on new lines
 set smartindent     " Smart autoindenting on new lines
 set clipboard=unnamedplus
+
 set showmatch           " Jump to matching bracket
 " set matchpairs+=<:>     " Add HTML brackets to pair matching
 " set matchtime=1         " Tenths of a second to show the matching paren
+
+set pumheight=15        " Pop-up menu's line height
+set helpheight=12       " Minimum help window height
+set previewheight=12    " Completion preview height
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -185,12 +190,6 @@ nnoremap <leader>cr :CocRestart
 nmap <leader>f  <Plug>(coc-format-selected)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>qf  <Plug>(coc-fix-current)
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of LS,  coc-tsserver
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-nmap <silent> <C-M-j> <Plug>(coc-cursors-position)
-nmap <expr> <silent> <C-x> <SID>select_current_word()
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
 
@@ -206,13 +205,6 @@ endfunction
 
 inoremap <silent><expr> <C-space> coc#refresh()
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
-
-function! s:select_current_word()
-    if !get(g:, 'coc_cursors_activated', 0)
-        return "\<Plug>(coc-cursors-word)"
-    endif
-    return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
-endfunc
 
 " autocmd CursorHold * silent call CocActionAsync('highlight')
 
