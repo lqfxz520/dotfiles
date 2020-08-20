@@ -35,10 +35,11 @@ set noshowmode
 set autoindent      " Use same indenting on new lines
 set smartindent     " Smart autoindenting on new lines
 set clipboard=unnamedplus
+set foldmethod=syntax  " folding by syntax regions
 
 set showmatch           " Jump to matching bracket
-" set matchpairs+=<:>     " Add HTML brackets to pair matching
-" set matchtime=1         " Tenths of a second to show the matching paren
+set matchpairs+=<:>     " Add HTML brackets to pair matching
+set matchtime=1         " Tenths of a second to show the matching paren
 
 set pumheight=15        " Pop-up menu's line height
 set helpheight=12       " Minimum help window height
