@@ -71,7 +71,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-dispatch'
 Plug 'terryma/vim-multiple-cursors'
-
+Plug 'easymotion/vim-easymotion'
 
 
 Plug 'gruvbox-community/gruvbox'
@@ -135,10 +135,6 @@ set background=dark
 
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 0
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-
-" let g:multi_cursor_quit_key = '<C-c>'
 
 if executable('rg')
     let g:rg_derive_root='true'
@@ -177,6 +173,10 @@ nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>
 nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
+nnoremap <Left> :tabp<CR>
+nnoremap <Right> :tabn<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 " GoTo code navigation.
@@ -211,7 +211,6 @@ endfunction
 inoremap <silent><expr> <C-space> coc#refresh()
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " vim TODO
 nmap <Leader>tu <Plug>BujoChecknormal
@@ -229,6 +228,7 @@ endfunction
 nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
+nmap <leader>gc :G log -p %<CR>
 
 fun! TrimWhitespace()
     let l:save = winsaveview()
