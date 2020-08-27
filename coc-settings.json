@@ -12,5 +12,5 @@
         "vue",
         "vue-html"
     ],
-    "coc.preferences.colorSupport": false
+    "explorer.icon.enableNerdfont": true
 }
