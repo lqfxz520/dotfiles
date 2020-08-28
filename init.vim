@@ -285,6 +285,6 @@ function s:scan() abort
   endfor
 endfunction
 
-" noremap <leader>v :call <SID>scan()<CR>
+noremap <leader>v :call <SID>scan()<CR>
 
 let g:tcomment#replacements_xml={}
