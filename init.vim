@@ -50,8 +50,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=50
-
+set updatetime=300
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
@@ -246,3 +245,31 @@ autocmd BufWritePre * :call TrimWhitespace()
 if has('nvim')
     set guicursor=n-v-c:block-Cursor/lCursor,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 endif
+
+" spaceline {{{
+set list
+set listchars=tab:›\ ,trail:-,extends:#,nbsp:.
+" }}} spaceline
+
+" syntax {{{
+set synmaxcol=200
+" }}} syntax
+
+" mouse {{{
+set mouse+=a
+set mousehide
+" }}} mouse
+
+" guicursor
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+            \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+            \,sm:block-blinkwait175-blinkoff150-blinkon175
+
+function s:exit_to_normal() abort
+    if &filetype ==# 'fzf'
+        return "\<Esc>"
+    endif
+    return "\<C-\>\<C-n>"
+endfunction
+tnoremap <expr> <Esc> <SID>exit_to_normal()
+
