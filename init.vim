@@ -11,7 +11,6 @@ endif
 
 syntax on
 
-" set guicursor=
 set noshowmatch
 set relativenumber
 set nohlsearch
@@ -30,11 +29,16 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set termguicolors
-set scrolloff=8
 set noshowmode
 set autoindent      " Use same indenting on new lines
 set smartindent     " Smart autoindenting on new lines
 set clipboard=unnamedplus
+
+set scrolloff=3
+set sidescrolloff=5
+
+set foldenable
+set foldlevelstart=99
 set foldmethod=syntax  " folding by syntax regions
 
 set showmatch           " Jump to matching bracket
@@ -61,17 +65,18 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tweekmonster/gofmt.vim'
-Plug 'tpope/vim-fugitive'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
-Plug 'tpope/vim-dispatch'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
-
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tomtom/tcomment_vim'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -162,12 +167,11 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
-" nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nmap <leader>pv :CocCommand explorer --toggle<CR>
+nnoremap <leader>pv :CocCommand explorer --toggle<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <Leader>pf :Files<CR>
-nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader><CR> :so <C-R>=<SID>sourceInit()<CR><CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>
@@ -188,7 +192,7 @@ nmap <leader>g[ <Plug>(coc-diagnostic-prev)
 nmap <leader>g] <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <leader>cr :CocRestart
+nnoremap <leader>cr :CocRestart<CR>
 
 " Formatting selected code.
 nmap <leader>f  <Plug>(coc-format-selected)
@@ -207,6 +211,14 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+function! s:sourceInit () abort
+    if empty($XDG_CONFIG_HOME)
+         return $HOME . '/.config/nvim/init.vim'
+    else
+        return $XDG_CONFIG_HOME . '/nvim/init.vim'
+    endif
+endfunction
+
 inoremap <silent><expr> <C-space> coc#refresh()
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
@@ -219,10 +231,6 @@ let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 vnoremap X "_d
 inoremap <C-c> <esc>
 
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 " Sweet Sweet FuGITive
 nmap <leader>gh :diffget //3<CR>
 nmap <leader>gu :diffget //2<CR>
@@ -248,7 +256,7 @@ set listchars=tab:›\ ,trail:-,extends:#,nbsp:.
 " }}} spaceline
 
 " syntax {{{
-set synmaxcol=200
+set synmaxcol=1000
 " }}} syntax
 
 " mouse {{{
@@ -256,10 +264,11 @@ set mouse+=a
 set mousehide
 " }}} mouse
 
-" guicursor
+" guicursor {{{
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
             \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
             \,sm:block-blinkwait175-blinkoff150-blinkon175
+" }}} guicursor
 
 function s:exit_to_normal() abort
     if &filetype ==# 'fzf'
@@ -268,3 +277,14 @@ function s:exit_to_normal() abort
     return "\<C-\>\<C-n>"
 endfunction
 tnoremap <expr> <Esc> <SID>exit_to_normal()
+
+function s:scan() abort
+  let l:stack = synstack(line('.'), col('.'))
+  for l:name in l:stack
+    echo synIDattr(l:name, 'name')
+  endfor
+endfunction
+
+noremap <leader>v :call <SID>scan()<CR>
+
+let g:tcomment#replacements_xml={}
