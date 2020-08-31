@@ -272,9 +272,7 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
 " insert keymap like emacs {{
 " inoremap <C-w> <C-[>diwa
-" inoremap <C-h> <BS>
 inoremap <C-d> <Del>
-" inoremap <C-u> <C-G>u<C-U>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <C-a> <Home>
