@@ -270,6 +270,30 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
             \,sm:block-blinkwait175-blinkoff150-blinkon175
 " }}} guicursor
 
+" insert keymap like emacs {{
+" inoremap <C-w> <C-[>diwa
+" inoremap <C-h> <BS>
+inoremap <C-d> <Del>
+" inoremap <C-u> <C-G>u<C-U>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-a> <Home>
+inoremap <expr><C-e> pumvisible() ? "\<C-e>" : "\<End>"
+" }}}
+
+" meta keys {{
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+inoremap <A-1> <C-o>1gt
+inoremap <A-2> <C-o>2gt
+inoremap <A-3> <C-o>3gt
+inoremap <A-4> <C-o>4gt
+inoremap <A-5> <C-o>5gt
+" }}
+
 function s:exit_to_normal() abort
     if &filetype ==# 'fzf'
         return "\<Esc>"
