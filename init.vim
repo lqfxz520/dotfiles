@@ -256,7 +256,7 @@ set listchars=tab:›\ ,trail:-,extends:#,nbsp:.
 " }}} spaceline
 
 " syntax {{{
-set synmaxcol=1000
+set synmaxcol=300
 " }}} syntax
 
 " mouse {{{
