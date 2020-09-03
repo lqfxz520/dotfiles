@@ -98,6 +98,7 @@ let g:coc_global_extensions=[
     \ 'coc-emmet',
     \ 'coc-explorer',
     \ 'coc-translator',
+    \ 'coc-highlight'
  \ ]
 
 if exists('+termguicolors')
@@ -249,6 +250,7 @@ augroup highlight_yank
 augroup END
 
 autocmd BufWritePre * :call TrimWhitespace()
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " spaceline {{{
 set list
