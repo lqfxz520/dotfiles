@@ -168,7 +168,8 @@ nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>pv :CocCommand explorer --toggle<CR>
+nnoremap <leader>pv :CocCommand explorer<CR>
+nnoremap <leader>pp :CocCommand explorer --position floating<CR>
 nnoremap <Leader>ps :Rg<SPACE>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <Leader>pf :Files<CR>
@@ -199,6 +200,7 @@ nnoremap <leader>cr :CocRestart<CR>
 nmap <leader>f  <Plug>(coc-format-selected)
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>qf  <Plug>(coc-fix-current)
+
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
 
