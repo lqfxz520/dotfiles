@@ -98,7 +98,8 @@ let g:coc_global_extensions=[
     \ 'coc-emmet',
     \ 'coc-explorer',
     \ 'coc-translator',
-    \ 'coc-highlight'
+    \ 'coc-highlight',
+    \ 'coc-tabnine'
  \ ]
 
 if exists('+termguicolors')
