@@ -7,6 +7,6 @@
     "html.autoClosingTags": true,
     "explorer.icon.enableNerdfont": true,
     "npm.binPath": "cnpm",
-    "coc.preferences.colorSupport": false,
-    "javascript.validate.enable": false
+    "coc.preferences.colorSupport": true,
+    "javascript.validate.enable": true
 }

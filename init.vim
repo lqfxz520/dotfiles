@@ -39,7 +39,7 @@ set sidescrolloff=5
 
 set foldenable
 set foldlevelstart=99
-set foldmethod=syntax  " folding by syntax regions
+set foldmethod=indent  " folding by syntax regions
 
 set showmatch           " Jump to matching bracket
 set matchpairs+=<:>     " Add HTML brackets to pair matching
@@ -59,6 +59,7 @@ set updatetime=300
 set shortmess+=c
 
 set colorcolumn=80
+
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
@@ -77,6 +78,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
+Plug 'skywind3000/vim-terminal-help'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
