@@ -59,6 +59,7 @@ set updatetime=300
 set shortmess+=c
 
 set colorcolumn=80
+set cursorline
 
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
@@ -79,6 +80,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
 Plug 'skywind3000/vim-terminal-help'
+Plug 'Yggdroot/indentLine'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -259,7 +261,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " spaceline {{{
 set list
-set listchars=tab:›\ ,trail:-,extends:#,nbsp:.
+set listchars=nbsp:█,tab:›\ ,trail:-,extends:#
 " }}} spaceline
 
 " syntax {{{
