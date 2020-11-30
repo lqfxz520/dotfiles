@@ -19,7 +19,6 @@ set noerrorbells
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
-set smartindent
 set nu
 set nowrap
 set smartcase
@@ -39,7 +38,7 @@ set sidescrolloff=5
 
 set foldenable
 set foldlevelstart=99
-set foldmethod=indent  " folding by syntax regions
+set foldmethod=syntax  " folding by syntax regions
 
 set showmatch           " Jump to matching bracket
 set matchpairs+=<:>     " Add HTML brackets to pair matching
@@ -54,7 +53,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=300
+set updatetime=50
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
@@ -69,7 +68,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tweekmonster/gofmt.vim'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
-Plug 'sheerun/vim-polyglot'
+Plug 'posva/vim-vue'
+" Plug 'sheerun/vim-polyglot'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
@@ -143,7 +143,7 @@ let g:gruvbox_contrast_dark = 'hard'
 colorscheme gruvbox
 set background=dark
 
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 0
 
 if executable('rg')
@@ -204,6 +204,15 @@ nnoremap <leader>cr :CocRestart<CR>
 " Formatting selected code.
 nmap <leader>f  <Plug>(coc-format-selected)
 vmap <leader>f  <Plug>(coc-format-selected)
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
 " coc-translator
@@ -229,6 +238,7 @@ endfunction
 
 inoremap <silent><expr> <C-space> coc#refresh()
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 Eslint :CocCommand eslint.executeAutofix
 
 
 " vim TODO
@@ -319,3 +329,5 @@ endfunction
 noremap <leader>v :call <SID>scan()<CR>
 
 let g:tcomment#replacements_xml={}
+
+let g:vue_pre_processor = ['scss']
