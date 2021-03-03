@@ -5,7 +5,7 @@
     "prettier.trailingComma": "es5",
     "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"],
     "html.autoClosingTags": true,
-    "explorer.icon.enableNerdfont": false,
+    "explorer.icon.enableNerdfont": true,
     "npm.binPath": "cnpm",
     "coc.preferences.colorSupport": false,
     "javascript.validate.enable": true,
