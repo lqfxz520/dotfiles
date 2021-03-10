@@ -38,7 +38,7 @@ set sidescrolloff=5
 
 set foldenable
 set foldlevelstart=99
-set foldmethod=syntax  " folding by syntax regions
+set foldmethod=indent  " folding by syntax regions
 
 set showmatch           " Jump to matching bracket
 set matchpairs+=<:>     " Add HTML brackets to pair matching
@@ -64,11 +64,14 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tweekmonster/gofmt.vim'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
-Plug 'sheerun/vim-polyglot'
+Plug 'posva/vim-vue'
+Plug 'pangloss/vim-javascript'
+" Plug 'sheerun/vim-polyglot'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
@@ -162,10 +165,12 @@ let $FZF_DEFAULT_OPTS='--reverse'
 
 " Save & quit
 noremap Q :q<CR>
-noremap S :w<CR>
+" noremap S :w<CR>
+noremap <A-s> :w<CR>
 
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
+nnoremap <leader>f :s/<C-R>=expand("<cword>")<CR>/
 nnoremap <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
@@ -200,9 +205,6 @@ nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 nnoremap <leader>cr :CocRestart<CR>
 
-" Formatting selected code.
-nmap <leader>f  <Plug>(coc-format-selected)
-vmap <leader>f  <Plug>(coc-format-selected)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph

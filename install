@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+mkdir -p $XDG_CONFIG_HOME/nvim/plugin
+mkdir -p $XDG_CONFIG_HOME/nvim/after/plugin
+mkdir -p $XDG_CONFIG_HOME/nvim/lua
+
+# link wholesale
+for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
+    echo $f
+    rm -rf $XDG_CONFIG_HOME/nvim/$f
+    ln -s ~/.dotfiles/$f $XDG_CONFIG_HOME/nvim/$f
+done
