@@ -1,68 +1,20 @@
-" ===
-" === Auto load for first time uses
-" ===
-let basePath = ! empty($XDG_DATA_HOME) ? $XDG_DATA_HOME : $HOME . '/.local/share'
-if empty(glob(basePath . '/nvim/site/autoload/plug.vim'))
-    echo basePath
-    silent !curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-syntax on
-
-set noshowmatch
-set relativenumber
-set nohlsearch
-set hidden
-set noerrorbells
-set tabstop=4 softtabstop=4
-set shiftwidth=4
-set expandtab
-set nu
-set nowrap
-set smartcase
-set noswapfile
-set nobackup
-set undodir=~/.vim/undodir
-set undofile
-set incsearch
-set termguicolors
-set noshowmode
-set autoindent      " Use same indenting on new lines
-set smartindent     " Smart autoindenting on new lines
-set clipboard=unnamedplus
-
-set scrolloff=3
-set sidescrolloff=5
-
-set foldenable
-set foldlevelstart=99
-set foldmethod=indent  " folding by syntax regions
-
-set showmatch           " Jump to matching bracket
-set matchpairs+=<:>     " Add HTML brackets to pair matching
-set matchtime=1         " Tenths of a second to show the matching paren
-
-set pumheight=15        " Pop-up menu's line height
-set helpheight=12       " Minimum help window height
-set previewheight=12    " Completion preview height
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=50
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-set colorcolumn=80
-set cursorline
-
-highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 call plug#begin('~/.vim/plugged')
+
+" Plebvim lsp Plugins
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
+" Plug 'tjdevries/nlua.nvim'
+" Plug 'tjdevries/lsp_extensions.nvim'
+
+
+
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+
+
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tweekmonster/gofmt.vim'
@@ -108,26 +60,6 @@ let g:coc_global_extensions=[
     \ 'coc-tabnine'
  \ ]
 
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-
-" --- vim go (polyglot) settings.
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_types = 1
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_auto_sameids = 1
 
 " Pseudo-transparency for completion menu and floating windows
 if exists('&pumblend')
@@ -139,11 +71,6 @@ if exists('&pumblend')
    endif
 endif
 
-let g:gruvbox_invert_selection=0
-let g:gruvbox_contrast_dark = 'hard'
-
-colorscheme gruvbox
-set background=dark
 
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 0
@@ -168,31 +95,24 @@ noremap Q :q<CR>
 " noremap S :w<CR>
 noremap <A-s> :w<CR>
 
-nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
+" nnoremap <Leader>ps :Rg<SPACE>
+" nnoremap <C-p> :GFiles<CR>
+" nnoremap <Leader>pf :Files<CR>
 nnoremap <leader>f :s/<C-R>=expand("<cword>")<CR>/
-nnoremap <leader>phw :h <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>pv :CocCommand explorer<CR>
 nnoremap <leader>pp :CocCommand explorer --position floating<CR>
-nnoremap <Leader>ps :Rg<SPACE>
-nnoremap <C-p> :GFiles<CR>
-nnoremap <Leader>pf :Files<CR>
 nnoremap <Leader><CR> :so <C-R>=<SID>sourceInit()<CR><CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>
 nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
-nnoremap <Left> :tabp<CR>
-nnoremap <Right> :tabn<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+
+
+
+
 " GoTo code navigation.
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gy <Plug>(coc-type-definition)
@@ -203,7 +123,6 @@ nmap <leader>g[ <Plug>(coc-diagnostic-prev)
 nmap <leader>g] <Plug>(coc-diagnostic-next)
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <leader>cr :CocRestart<CR>
 
 
 " Applying codeAction to the selected region.
@@ -250,45 +169,9 @@ let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 vnoremap X "_d
 inoremap <C-c> <esc>
 
-" Sweet Sweet FuGITive
-nmap <leader>gh :diffget //3<CR>
-nmap <leader>gu :diffget //2<CR>
-nmap <leader>gs :G<CR>
-nmap <leader>gc :G log -p %<CR>
 
-fun! TrimWhitespace()
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-endfun
 
-augroup highlight_yank
-    autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 50)
-augroup END
 
-autocmd BufWritePre * :call TrimWhitespace()
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" spaceline {{{
-set list
-set listchars=nbsp:█,tab:›\ ,trail:-,extends:#
-" }}} spaceline
-
-" syntax {{{
-set synmaxcol=300
-" }}} syntax
-
-" mouse {{{
-set mouse+=a
-set mousehide
-" }}} mouse
-
-" guicursor {{{
-set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
-            \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
-            \,sm:block-blinkwait175-blinkoff150-blinkon175
-" }}} guicursor
 
 " insert keymap like emacs {{
 " inoremap <C-w> <C-[>diwa
@@ -299,18 +182,6 @@ inoremap <C-a> <Home>
 inoremap <expr><C-e> pumvisible() ? "\<C-e>" : "\<End>"
 " }}}
 
-" meta keys {{
-nnoremap <A-1> 1gt
-nnoremap <A-2> 2gt
-nnoremap <A-3> 3gt
-nnoremap <A-4> 4gt
-nnoremap <A-5> 5gt
-inoremap <A-1> <C-o>1gt
-inoremap <A-2> <C-o>2gt
-inoremap <A-3> <C-o>3gt
-inoremap <A-4> <C-o>4gt
-inoremap <A-5> <C-o>5gt
-" }}
 
 function s:exit_to_normal() abort
     if &filetype ==# 'fzf'
@@ -331,4 +202,18 @@ noremap <leader>v :call <SID>scan()<CR>
 
 let g:tcomment#replacements_xml={}
 
-let g:vue_pre_processor = ['scss']
+let g:vue_pre_processor = ['scss', 'less']
+
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+augroup highlight_yank
+    autocmd!
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 50)
+augroup END
+
+autocmd BufWritePre * :call TrimWhitespace()
+autocmd CursorHold * silent call CocActionAsync('highlight')
