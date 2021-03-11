@@ -24,8 +24,8 @@ Plug 'posva/vim-vue'
 Plug 'pangloss/vim-javascript'
 " Plug 'sheerun/vim-polyglot'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'junegunn/fzf.vim'
 Plug 'vuciv/vim-bujo'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'easymotion/vim-easymotion'
@@ -34,7 +34,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
 Plug 'skywind3000/vim-terminal-help'
-Plug 'Yggdroot/indentLine'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -47,6 +46,10 @@ Plug 'hardcoreplayers/oceanic-material'
 
 
 call plug#end()
+
+
+lua require("lqf")
+
 let g:coc_global_extensions=[
     \ 'coc-json',
     \ 'coc-tsserver',
@@ -148,17 +151,17 @@ function! s:check_back_space() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-function! s:sourceInit () abort
-    if empty($XDG_CONFIG_HOME)
-         return $HOME . '/.config/nvim/init.vim'
-    else
-        return $XDG_CONFIG_HOME . '/nvim/init.vim'
-    endif
-endfunction
+" function! s:sourceInit () abort
+"     if empty($XDG_CONFIG_HOME)
+"          return $HOME . '/.config/nvim/init.vim'
+"     else
+"         return $XDG_CONFIG_HOME . '/nvim/init.vim'
+"     endif
+" endfunction
 
-inoremap <silent><expr> <C-space> coc#refresh()
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-command! -nargs=0 Eslint :CocCommand eslint.executeAutofix
+" inoremap <silent><expr> <C-space> coc#refresh()
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" command! -nargs=0 Eslint :CocCommand eslint.executeAutofix
 
 
 " vim TODO
