@@ -27,7 +27,8 @@ set sidescrolloff=5
 
 set foldenable
 set foldlevelstart=99
-set foldmethod=indent  " folding by syntax regions
+set foldmethod=expr  " folding by syntax regions
+set foldexpr=nvim_treesitter#foldexpr()
 
 set showmatch           " Jump to matching bracket
 set matchpairs+=<:>     " Add HTML brackets to pair matching
