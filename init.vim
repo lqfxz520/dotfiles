@@ -16,8 +16,11 @@ Plug 'nvim-telescope/telescope.nvim'
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
-Plug 'nvim-treesitter/completion-treesitter'
+" Plug 'nvim-treesitter/completion-treesitter'
 
+" snippet
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 " prettier
 Plug 'sbdchd/neoformat'
 
@@ -70,12 +73,15 @@ if executable('rg')
     let g:rg_derive_root='true'
 endif
 
+
 let loaded_matchparen = 1
 let mapleader = " "
 
 let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
+
+let g:completion_enable_snippet = 'vim-vsnip'
 
 
 " Save & quit
