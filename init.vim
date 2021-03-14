@@ -89,7 +89,8 @@ noremap Q :q<CR>
 noremap <A-s> :w<CR>
 
 nnoremap <leader>f :s/<C-R>=expand("<cword>")<CR>/
-nnoremap <leader>pv :CocCommand explorer<CR>
+" nnoremap <leader>pv :CocCommand explorer<CR>
+nnoremap <leader>pv :Ex<CR>
 nnoremap <leader>pp :CocCommand explorer --position floating<CR>
 nnoremap <Leader><CR> :so <C-R>=<SID>sourceInit()<CR><CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
@@ -128,10 +129,19 @@ nmap <Leader>tu <Plug>BujoChecknormal
 nmap <Leader>th <Plug>BujoAddnormal
 let g:bujo#todo_file_path = $HOME . "/.cache/bujo"
 
-vnoremap X "_d
+" greatest remap ever
+vnoremap <leader>p "_dP
+
+" next greatest remap ever : asbjornHaland
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y gg"+yG
+
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+nnoremap <leader>Y gg"+yG
+
 inoremap <C-c> <esc>
-
-
 
 
 
@@ -166,7 +176,7 @@ let g:tcomment#replacements_xml={}
 
 augroup highlight_yank
     autocmd!
-    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 50)
+    autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
 augroup LQF autocmd!
