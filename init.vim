@@ -16,20 +16,24 @@ Plug 'nvim-telescope/telescope.nvim'
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
+Plug 'nvim-treesitter/completion-treesitter'
 
+" prettier
+Plug 'sbdchd/neoformat'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tweekmonster/gofmt.vim'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'vuciv/vim-bujo'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'easymotion/vim-easymotion'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
 Plug 'skywind3000/vim-terminal-help'
+Plug 'Yggdroot/indentLine'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -164,4 +168,9 @@ augroup LQF autocmd!
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
 
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
+"
 " autocmd CursorHold * silent call CocActionAsync('highlight')
