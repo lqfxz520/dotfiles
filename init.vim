@@ -25,7 +25,7 @@ Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'sbdchd/neoformat'
 
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tweekmonster/gofmt.vim'
+" Plug 'tweekmonster/gofmt.vim'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'vuciv/vim-bujo'
