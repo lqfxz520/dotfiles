@@ -1,4 +1,3 @@
-
 call plug#begin('~/.vim/plugged')
 
 " Plebvim lsp Plugins
@@ -96,7 +95,7 @@ nnoremap <Leader><CR> :so <C-R>=<SID>sourceInit()<CR><CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>
-nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kkI<esc>
+nnoremap <Leader>ee oconsole.log()<esc>i
 
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
