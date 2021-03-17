@@ -89,7 +89,7 @@ noremap <A-s> :w<CR>
 
 nnoremap <leader>f :s/<C-R>=expand("<cword>")<CR>/
 " nnoremap <leader>pv :CocCommand explorer<CR>
-nnoremap <leader>pv :Ex<CR>
+nnoremap <leader>pv :Lex<CR>
 nnoremap <leader>pp :CocCommand explorer --position floating<CR>
 nnoremap <Leader><CR> :so <C-R>=<SID>sourceInit()<CR><CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
@@ -138,7 +138,6 @@ nnoremap <leader>Y gg"+yG
 
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
-nnoremap <leader>Y gg"+yG
 
 inoremap <C-c> <esc>
 
@@ -185,7 +184,7 @@ augroup END
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+  autocmd BufWritePre * | Neoformat
 augroup END
 "
 " autocmd CursorHold * silent call CocActionAsync('highlight')
