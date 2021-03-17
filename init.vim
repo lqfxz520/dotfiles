@@ -5,6 +5,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
+Plug 'anott03/nvim-lspinstall'
 
 
 
@@ -81,7 +82,14 @@ let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
 let g:completion_enable_snippet = 'vim-vsnip'
-
+let g:completion_confirm_key = "\<C-y>"
+let g:completion_chain_complete_list = {
+    \'default' : [
+    \    {'complete_items': ['lsp', 'snippet']},
+    \    {'mode': '<c-p>'},
+    \    {'mode': '<c-n>'}
+    \]
+    \}
 
 " Save & quit
 noremap Q :q<CR>
@@ -179,12 +187,13 @@ augroup END
 
 augroup LQF autocmd!
     autocmd BufWritePre * %s/\s\+$//e
+    autocmd BufEnter * lua require'completion'.on_attach()
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre * | Neoformat
+  autocmd BufWritePre * Neoformat
 augroup END
 "
 " autocmd CursorHold * silent call CocActionAsync('highlight')
