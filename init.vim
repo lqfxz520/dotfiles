@@ -97,7 +97,7 @@ noremap <A-s> :w<CR>
 
 nnoremap <leader>f :s/<C-R>=expand("<cword>")<CR>/
 " nnoremap <leader>pv :CocCommand explorer<CR>
-nnoremap <leader>pv :Lex<CR>
+nnoremap <leader>pv :Lex!<CR>
 nnoremap <leader>pp :CocCommand explorer --position floating<CR>
 nnoremap <Leader><CR> :so <C-R>=<SID>sourceInit()<CR><CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
@@ -187,8 +187,9 @@ augroup END
 
 augroup LQF autocmd!
     autocmd BufWritePre * %s/\s\+$//e
-    autocmd BufEnter * lua require'completion'.on_attach()
+    " autocmd BufEnter * lua require'completion'.on_attach()
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
+    autocmd Filetype vue setlocal omnifunc=v:lua.vim.lsp.omnifunc
 augroup END
 
 augroup fmt
