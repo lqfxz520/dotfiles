@@ -2,10 +2,11 @@ call plug#begin('~/.vim/plugged')
 
 " Plebvim lsp Plugins
 Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+" Plug 'nvim-lua/completion-nvim'
 Plug 'tjdevries/nlua.nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'anott03/nvim-lspinstall'
+Plug 'hrsh7th/nvim-compe'
 
 
 
@@ -80,6 +81,12 @@ let mapleader = " "
 let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
+
+inoremap <silent><expr> <C-'>     compe#complete()
+inoremap <silent><expr> <C-y>     compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 let g:completion_enable_snippet = 'vim-vsnip'
 let g:completion_confirm_key = "\<C-y>"
@@ -189,7 +196,6 @@ augroup LQF autocmd!
     autocmd BufWritePre * %s/\s\+$//e
     " autocmd BufEnter * lua require'completion'.on_attach()
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
-    autocmd Filetype vue setlocal omnifunc=v:lua.vim.lsp.omnifunc
 augroup END
 
 augroup fmt
