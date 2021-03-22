@@ -8,8 +8,6 @@ Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'anott03/nvim-lspinstall'
 Plug 'hrsh7th/nvim-compe'
 
-
-
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -48,6 +46,7 @@ Plug 'hardcoreplayers/oceanic-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'dbeniamine/cheat.sh-vim'
 
 call plug#end()
 
