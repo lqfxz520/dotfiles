@@ -36,6 +36,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
 Plug 'skywind3000/vim-terminal-help'
 Plug 'Yggdroot/indentLine'
+Plug 'preservim/nerdtree'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -103,7 +104,7 @@ noremap <A-s> :w<CR>
 
 nnoremap <leader>f :s/<C-R>=expand("<cword>")<CR>/
 " nnoremap <leader>pv :CocCommand explorer<CR>
-nnoremap <leader>pv :Lex!<CR>
+nnoremap <leader>pv :NERDTreeToggle<CR>
 nnoremap <leader>pp :CocCommand explorer --position floating<CR>
 nnoremap <Leader><CR> :so <C-R>=<SID>sourceInit()<CR><CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
