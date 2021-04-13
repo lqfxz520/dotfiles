@@ -10,5 +10,6 @@
   "coc.preferences.colorSupport": true,
   "javascript.validate.enable": true,
   "eslint.autoFixOnSave": false,
-  "highlight.colors.enable": false
+  "highlight.colors.enable": false,
+  "explorer.git.enable": false
 }

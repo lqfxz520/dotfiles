@@ -19,17 +19,17 @@ nnoremap <leader>vp <Plug>(coc-diagnostic-prev)
 nnoremap <leader>vn <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nnoremap <leader>vd <Plug>(coc-definition)
-nnoremap <leader>vy <Plug>(coc-type-definition)
-nnoremap <leader>vi <Plug>(coc-implementation)
-nnoremap <leader>vrr <Plug>(coc-references)
-nnoremap <leader>vrn <Plug>(coc-rename)
-nnoremap <leader>vll :<C-u>CocList diagnostics<cr>
+nmap <leader>vd <Plug>(coc-definition)
+nmap <leader>vy <Plug>(coc-type-definition)
+nmap <leader>vi <Plug>(coc-implementation)
+nmap <leader>vrr <Plug>(coc-references)
+nmap <leader>vrn <Plug>(coc-rename)
+nmap <leader>vll :<C-u>CocList diagnostics<cr>
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>vca  <Plug>(coc-codeaction-selected)
-nmap <leader>vca  <Plug>(coc-codeaction-selected)
+xmap <leader>vca <Plug>(coc-codeaction-selected)
+nmap <leader>vca <Plug>(coc-codeaction-selected)
 
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-inoremap <c-x><c-i> coc#refresh()
+nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
+inoremap <silent><expr> <c-x><c-i> coc#refresh()
