@@ -1,5 +1,12 @@
 call plug#begin('~/.vim/plugged')
 
+" Plebvim lsp Plugins
+Plug 'neovim/nvim-lspconfig'
+" Plug 'nvim-lua/completion-nvim'
+Plug 'tjdevries/nlua.nvim'
+Plug 'tjdevries/lsp_extensions.nvim'
+Plug 'anott03/nvim-lspinstall'
+Plug 'hrsh7th/nvim-compe'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -10,16 +17,26 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 " Plug 'nvim-treesitter/completion-treesitter'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" snippet
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+" prettier
+Plug 'sbdchd/neoformat'
+
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'tweekmonster/gofmt.vim'
 Plug 'vim-utils/vim-man'
 Plug 'mbbill/undotree'
 Plug 'vuciv/vim-bujo'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tomtom/tcomment_vim'
 Plug 'skywind3000/vim-terminal-help'
 Plug 'Yggdroot/indentLine'
+Plug 'preservim/nerdtree'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -37,20 +54,18 @@ call plug#end()
 
 lua require("lqf")
 
-let g:coc_global_extensions=[
-    \ 'coc-json',
-    \ 'coc-tsserver',
-    \ 'coc-vetur',
-    \ 'coc-prettier',
-    \ 'coc-html',
-    \ 'coc-emmet',
-    \ 'coc-explorer',
-    \ 'coc-translator',
-    \ 'coc-tabnine',
-    \ 'coc-eslint',
-    \ 'coc-snippets',
-    \ 'coc-pairs',
- \ ]
+" let g:coc_global_extensions=[
+"     \ 'coc-json',
+"     \ 'coc-tsserver',
+"     \ 'coc-vetur',
+"     \ 'coc-prettier',
+"     \ 'coc-html',
+"     \ 'coc-emmet',
+"     \ 'coc-explorer',
+"     \ 'coc-translator',
+"     \ 'coc-highlight',
+"     \ 'coc-tabnine'
+"  \ ]
 
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 0
@@ -67,13 +82,29 @@ let g:netrw_browse_split = 2
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
 
+inoremap <silent><expr> <C-'>     compe#complete()
+inoremap <silent><expr> <C-y>     compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+let g:completion_enable_snippet = 'vim-vsnip'
+let g:completion_confirm_key = "\<C-y>"
+let g:completion_chain_complete_list = {
+    \'default' : [
+    \    {'complete_items': ['lsp', 'snippet']},
+    \    {'mode': '<c-p>'},
+    \    {'mode': '<c-n>'}
+    \]
+    \}
+
 " Save & quit
 noremap Q :q<CR>
 noremap <A-s> :w<CR>
 
 nnoremap <leader>f :s/<C-R>=expand("<cword>")<CR>/
 " nnoremap <leader>pv :CocCommand explorer<CR>
-nnoremap <leader>pv :CocCommand explorer<CR>
+nnoremap <leader>pv :NERDTreeToggle<CR>
 nnoremap <leader>pp :CocCommand explorer --position floating<CR>
 nnoremap <Leader><CR> :so <C-R>=<SID>sourceInit()<CR><CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
@@ -160,14 +191,13 @@ augroup END
 
 augroup LQF autocmd!
     autocmd BufWritePre * %s/\s\+$//e
+    " autocmd BufEnter * lua require'completion'.on_attach()
+    autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre * Format
+  autocmd BufWritePre * Neoformat
 augroup END
 "
 " autocmd CursorHold * silent call CocActionAsync('highlight')
