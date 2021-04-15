@@ -31,5 +31,5 @@ nmap <leader>vll :<C-u>CocList diagnostics<cr>
 xmap <leader>vca <Plug>(coc-codeaction-selected)
 nmap <leader>vca <Plug>(coc-codeaction-selected)
 
-nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
+" nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
 inoremap <silent><expr> <c-x><c-i> coc#refresh()

@@ -8,6 +8,10 @@ Plug 'nvim-telescope/telescope.nvim'
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'theHamsta/nvim-treesitter-pairs'
+Plug 'windwp/nvim-ts-autotag'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Plug 'nvim-treesitter/completion-treesitter'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -151,7 +155,7 @@ endfunction
 
 noremap <leader>v :call <SID>scan()<CR>
 
-let g:tcomment#replacements_xml={}
+let g:tcomment#filetype#guess_vue = 0
 
 augroup highlight_yank
     autocmd!

@@ -20,5 +20,53 @@ require'nvim-treesitter.configs'.setup {
             scope_incremental = "grc",
             node_decremental = "grm",
         },
-  },
+    },
+    context_commentstring = {
+        enable = true,
+    },
+    pairs = {
+        enable = true,
+        disable = {},
+        highlight_pair_events = {"CursorMoved"}, -- when to highlight the pairs, use {} to deactivate highlighting
+        highlight_self = true,
+        goto_right_end = false, -- whether to go to the end of the right partner or the beginning
+        fallback_cmd_normal = "call matchit#Match_wrapper('',1,'n')", -- What command to issue when we can't find a pair (e.g. "normal! %")
+        keymaps = {
+            goto_partner = "%"
+        }
+    },
+    autotag = {
+        enable = true,
+    },
+    textobjects = {
+        select = {
+            enable = true,
+            keymaps = {
+                -- You can use the capture groups defined in textobjects.scm
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+
+                -- Or you can define your own textobjects like this
+                ["iF"] = {
+                    python = "(function_definition) @function",
+                    cpp = "(function_definition) @function",
+                    c = "(function_definition) @function",
+                    java = "(method_declaration) @function",
+                },
+            },
+            swap = {
+                enable = true,
+                swap_next = {
+                    ["<Leader>a"] = "@parameter.inner",
+                },
+                swap_previous = {
+                    ["<Leader>A"] = "@parameter.inner",
+                },
+            },
+            lsp_interop = {
+                enable = true,
+            },       },
+    },
 }
