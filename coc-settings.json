@@ -1,15 +1,9 @@
 {
-  "prettier.tabWidth": 4,
-  "prettier.singleQuote": true,
-  "prettier.semi": false,
-  "prettier.trailingComma": "es5",
   "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"],
-  "html.autoClosingTags": true,
   "explorer.icon.enableNerdfont": true,
   "npm.binPath": "cnpm",
   "coc.preferences.colorSupport": true,
   "javascript.validate.enable": true,
   "eslint.autoFixOnSave": false,
-  "highlight.colors.enable": false,
   "explorer.git.enable": false
 }
