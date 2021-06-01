@@ -8,9 +8,9 @@ Plug 'nvim-telescope/telescope.nvim'
 " Neovim Tree shitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring', {'branch': 'main'}
 Plug 'theHamsta/nvim-treesitter-pairs'
-Plug 'windwp/nvim-ts-autotag'
+Plug 'windwp/nvim-ts-autotag', {'branch': 'main'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Plug 'nvim-treesitter/completion-treesitter'
 
