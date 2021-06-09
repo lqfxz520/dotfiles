@@ -24,7 +24,7 @@ Plug 'tpope/vim-repeat'
 " Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-commentary'
 Plug 'skywind3000/vim-terminal-help'
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -36,12 +36,14 @@ Plug 'phanviet/vim-monokai-pro'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'dbeniamine/cheat.sh-vim'
+Plug'puremourning/vimspector'
 
 call plug#end()
 
 
 lua require("lqf")
 
+    " \ 'coc-tabnine',
 let g:coc_global_extensions=[
     \ 'coc-json',
     \ 'coc-tsserver',
@@ -51,7 +53,6 @@ let g:coc_global_extensions=[
     \ 'coc-emmet',
     \ 'coc-explorer',
     \ 'coc-translator',
-    \ 'coc-tabnine',
     \ 'coc-eslint',
     \ 'coc-snippets',
     \ 'coc-pairs',
@@ -157,6 +158,7 @@ endfunction
 noremap <leader>v :call <SID>scan()<CR>
 
 let g:tcomment#filetype#guess_vue = 0
+let g:vimspector_enable_mappings = 'HUMAN'
 
 augroup highlight_yank
     autocmd!
