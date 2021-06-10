@@ -21,8 +21,8 @@ Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-" Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-commentary'
+Plug 'tomtom/tcomment_vim'
+" Plug 'tpope/vim-commentary'
 Plug 'skywind3000/vim-terminal-help'
 " Plug 'Yggdroot/indentLine'
 
@@ -36,7 +36,7 @@ Plug 'phanviet/vim-monokai-pro'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'dbeniamine/cheat.sh-vim'
-Plug'puremourning/vimspector'
+" Plug'puremourning/vimspector'
 
 call plug#end()
 

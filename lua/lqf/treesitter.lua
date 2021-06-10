@@ -23,6 +23,9 @@ require'nvim-treesitter.configs'.setup {
     },
     context_commentstring = {
         enable = true,
+        config = {
+            vue = "<!-- %s -->"
+        }
     },
     pairs = {
         enable = true,
