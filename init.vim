@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'cohama/lexima.vim'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -12,7 +13,6 @@ Plug 'JoosepAlviste/nvim-ts-context-commentstring', {'branch': 'main'}
 Plug 'theHamsta/nvim-treesitter-pairs'
 Plug 'windwp/nvim-ts-autotag', {'branch': 'main'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-" Plug 'nvim-treesitter/completion-treesitter'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-utils/vim-man'
@@ -21,21 +21,20 @@ Plug 'vuciv/vim-bujo'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-" Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-commentary'
 Plug 'skywind3000/vim-terminal-help'
-" Plug 'Yggdroot/indentLine'
 
 Plug 'gruvbox-community/gruvbox'
+Plug 'overcache/NeoSolarized'
+Plug 'drewtempelmeyer/palenight.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'hardcoreplayers/oceanic-material'
 Plug 'phanviet/vim-monokai-pro'
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 
-Plug 'dbeniamine/cheat.sh-vim'
 " Plug'puremourning/vimspector'
 
 call plug#end()
@@ -55,7 +54,6 @@ let g:coc_global_extensions=[
     \ 'coc-translator',
     \ 'coc-eslint',
     \ 'coc-snippets',
-    \ 'coc-pairs',
  \ ]
 
 let g:airline_powerline_fonts = 0
@@ -89,16 +87,6 @@ nnoremap <Leader>ee oconsole.log()<esc>i
 
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
-
-" inoremap <silent><expr> <Tab>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<Tab>" :
-"       \ coc#refresh()
-"
-" function! s:check_back_space() abort
-"     let col = col('.') - 1
-"     return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
 
 function! s:sourceInit () abort
     if empty($XDG_CONFIG_HOME)
@@ -147,15 +135,6 @@ function s:exit_to_normal() abort
     return "\<C-\>\<C-n>"
 endfunction
 tnoremap <expr> <Esc> <SID>exit_to_normal()
-
-function s:scan() abort
-  let l:stack = synstack(line('.'), col('.'))
-  for l:name in l:stack
-    echo synIDattr(l:name, 'name')
-  endfor
-endfunction
-
-noremap <leader>v :call <SID>scan()<CR>
 
 let g:tcomment#filetype#guess_vue = 0
 let g:vimspector_enable_mappings = 'HUMAN'
