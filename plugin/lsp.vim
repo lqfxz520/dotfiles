@@ -28,8 +28,9 @@ nmap <leader>vll :<C-u>CocList diagnostics<cr>
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-xmap <leader>vca <Plug>(coc-codeaction-selected)
-nmap <leader>vca <Plug>(coc-codeaction-selected)
+nmap <silent> <leader>a <Plug>(coc-codeaction-cursor)
+nmap <silent> ga <Plug>(coc-codeaction-line)
+nmap <silent> gA <Plug>(coc-codeaction)
 
 " nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
 inoremap <silent><expr> <c-x><c-i> coc#refresh()
