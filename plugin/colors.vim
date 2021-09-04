@@ -6,7 +6,7 @@ endif
 let g:gruvbox_invert_selection = 0
 let g:gruvbox_contrast_dark = 'hard'
 
-colorscheme gruvbox
+colorscheme palenight
 set background=dark
 
 " highlight ColorColumn ctermbg=0 guibg=lightgrey
