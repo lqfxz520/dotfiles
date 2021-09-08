@@ -2,10 +2,17 @@
 mkdir -p $XDG_CONFIG_HOME/nvim/plugin
 mkdir -p $XDG_CONFIG_HOME/nvim/after/plugin
 mkdir -p $XDG_CONFIG_HOME/nvim/lua
+mkdir -p $XDG_CONFIG_HOME/tmux/tpm
 
 # link wholesale
 for f in `find . -regex ".*\.vim$\|.*\.lua$"`; do
-    echo $f
+    # echo $f
     rm -rf $XDG_CONFIG_HOME/nvim/$f
     ln -s ~/.dotfiles/$f $XDG_CONFIG_HOME/nvim/$f
+done
+
+for f in `find . -regex ".*tmux.conf$\|.*tmux-.*\.sh$"`; do
+    echo $f
+    rm -rf $XDG_CONFIG_HOME/tmux/$f
+    ln -s ~/.dotfiles/$f $XDG_CONFIG_HOME/tmux/$f
 done
