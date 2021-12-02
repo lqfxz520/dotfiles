@@ -35,7 +35,7 @@ Plug 'hardcoreplayers/oceanic-material'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'ryanoasis/vim-devicons'
 
-" Plug'puremourning/vimspector'
+Plug 'puremourning/vimspector'
 
 call plug#end()
 
