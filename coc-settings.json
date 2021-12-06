@@ -34,5 +34,6 @@
     "typeParameter": "",
     "default": "\uf29c"
   },
-  "prettier.jsxBracketSameLine": true
+  "prettier.jsxBracketSameLine": true,
+  "vetur.enable": false
 }

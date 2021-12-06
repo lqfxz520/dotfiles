@@ -43,10 +43,10 @@ call plug#end()
 lua require("lqf")
 
     " \ 'coc-tabnine',
+    " \ 'coc-vetur',
 let g:coc_global_extensions=[
     \ 'coc-json',
     \ 'coc-tsserver',
-    \ 'coc-vetur',
     \ 'coc-prettier',
     \ 'coc-html',
     \ 'coc-emmet',
