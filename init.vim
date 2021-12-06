@@ -28,12 +28,15 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'overcache/NeoSolarized'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'sainnhe/gruvbox-material'
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'flazz/vim-colorschemes'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'hardcoreplayers/oceanic-material'
 Plug 'phanviet/vim-monokai-pro'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'puremourning/vimspector'
 
