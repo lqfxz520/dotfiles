@@ -14,7 +14,7 @@ require'lualine'.setup {
     lualine_c = {{
             'filename',
             file_status = true,
-            path = 1,
+            path = 0,
             shorting_target = 40
             }
     },
