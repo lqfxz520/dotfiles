@@ -32,12 +32,14 @@ local function get_typescript_server_path(root_dir)
 end
 
 -- Set up completion using nvim_cmp with LSP source
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').update_capabilities(
+    vim.lsp.protocol.make_client_capabilities()
+)
+
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
 }
 
 nvim_lsp.volar.setup {
@@ -48,4 +50,96 @@ nvim_lsp.volar.setup {
             new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
         end,
     }
+}
+
+nvim_lsp.diagnosticls.setup {
+    on_attach = on_attach,
+    filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'pandoc', 'vue' },
+    init_options = {
+        linters = {
+            eslint = {
+                command = 'eslint_d',
+                rootPatterns = { '.git' },
+                debounce = 100,
+                args = { '--stdin', '--stdin-filename', '%filepath', '--format', 'json' },
+                sourceName = 'eslint_d',
+                parseJson = {
+                    errorsRoot = '[0].messages',
+                    line = 'line',
+                    column = 'column',
+                    endLine = 'endLine',
+                    endColumn = 'endColumn',
+                    message = '[eslint] ${message} [${ruleId}]',
+                    security = 'severity'
+                },
+                securities = {
+                    [2] = 'error',
+                    [1] = 'warning'
+                }
+            },
+        },
+        filetypes = {
+            javascript = 'eslint',
+            javascriptreact = 'eslint',
+            typescript = 'eslint',
+            typescriptreact = 'eslint',
+            vue = 'eslint'
+        },
+        formatters = {
+            eslint_d = {
+                command = 'eslint_d',
+                rootPatterns = { '.git' },
+                args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
+                rootPatterns = { '.git' },
+            },
+            prettier = {
+                command = 'prettier_d_slim',
+                rootPatterns = { '.prettierrc', '.prettierrc.json', '.prettierrc.js', 'prettier.config.js', '.git' },
+                -- requiredFiles: { 'prettier.config.js' },
+                args = { '--stdin', '--stdin-filepath', '%filename' }
+            }
+        },
+        formatFiletypes = {
+            css = 'prettier',
+            javascript = 'prettier',
+            javascriptreact = 'prettier',
+            json = 'prettier',
+            scss = 'prettier',
+            less = 'prettier',
+            typescript = 'prettier',
+            typescriptreact = 'prettier',
+            json = 'prettier',
+            markdown = 'prettier',
+            vue = 'prettier'
+        }
+    }
+}
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+cmp.setup {
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+    mapping = {
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
+    },
+    sources = cmp.config.sources(
+        {
+            { name = 'nvim_lsp' },
+            { name = 'buffer' },
+            { name = 'path' },
+        }
+    ),
 }
