@@ -1,5 +1,5 @@
-set completeopt=menuone,noselect
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+" set completeopt=menuone,noselect
+" let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 
 " nnoremap <leader>vd :lua vim.lsp.buf.definition()<CR>
@@ -15,22 +15,22 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nnoremap <leader>vp <Plug>(coc-diagnostic-prev)
-nnoremap <leader>vn <Plug>(coc-diagnostic-next)
+" nnoremap <leader>vp <Plug>(coc-diagnostic-prev)
+" nnoremap <leader>vn <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
-nmap <leader>vd <Plug>(coc-definition)
-nmap <leader>vy <Plug>(coc-type-definition)
-nmap <leader>vi <Plug>(coc-implementation)
-nmap <leader>vrr <Plug>(coc-references)
-nmap <leader>vrn <Plug>(coc-rename)
-nmap <leader>vll :<C-u>CocList diagnostics<cr>
+" nmap <leader>vd <Plug>(coc-definition)
+" nmap <leader>vy <Plug>(coc-type-definition)
+" nmap <leader>vi <Plug>(coc-implementation)
+" nmap <leader>vrr <Plug>(coc-references)
+" nmap <leader>vrn <Plug>(coc-rename)
+" nmap <leader>vll :<C-u>CocList diagnostics<cr>
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-nmap <silent> <leader>a <Plug>(coc-codeaction-cursor)
-nmap <silent> ga <Plug>(coc-codeaction-line)
-nmap <silent> gA <Plug>(coc-codeaction)
+" nmap <silent> <leader>a <Plug>(coc-codeaction-cursor)
+" nmap <silent> ga <Plug>(coc-codeaction-line)
+" nmap <silent> gA <Plug>(coc-codeaction)
 
 " nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
-inoremap <silent><expr> <c-x><c-i> coc#refresh()
+" inoremap <silent><expr> <c-x><c-i> coc#refresh()
