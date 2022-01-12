@@ -10,11 +10,17 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'jose-elias-alvarez/nvim-lsp-ts-utils.nvim'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 
 Plug 'gruvbox-community/gruvbox' " theme
 call plug#end()
 
+runtime! lua/util.lua
 lua require("lqf1")
+
 let mapleader = " "
 set completeopt=menu,menuone,noselect
+
+" Save & quit
+noremap Q :q<CR>
+noremap <A-s> :w<CR>
