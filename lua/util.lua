@@ -9,24 +9,24 @@ end
 
 Util.borders = {
   -- fancy border
-  { "🭽", "FloatBorder" },
-  { "▔", "FloatBorder" },
-  { "🭾", "FloatBorder" },
-  { "▕", "FloatBorder" },
-  { "🭿", "FloatBorder" },
-  { "▁", "FloatBorder" },
-  { "🭼", "FloatBorder" },
-  { "▏", "FloatBorder" },
+  -- { "🭽", "FloatBorder" },
+  -- { "▔", "FloatBorder" },
+  -- { "🭾", "FloatBorder" },
+  -- { "▕", "FloatBorder" },
+  -- { "🭿", "FloatBorder" },
+  -- { "▁", "FloatBorder" },
+  -- { "🭼", "FloatBorder" },
+  -- { "▏", "FloatBorder" },
 
   -- padding border
-  -- {"▄", "Bordaa"},
-  -- {"▄", "Bordaa"},
-  -- {"▄", "Bordaa"},
-  -- {"█", "Bordaa"},
-  -- {"▀", "Bordaa"},
-  -- {"▀", "Bordaa"},
-  -- {"▀", "Bordaa"},
-  -- {"█", "Bordaa"}
+  {"▄", "Bordaa"},
+  {"▄", "Bordaa"},
+  {"▄", "Bordaa"},
+  {"█", "Bordaa"},
+  {"▀", "Bordaa"},
+  {"▀", "Bordaa"},
+  {"▀", "Bordaa"},
+  {"█", "Bordaa"}
 }
 
 Util.lsp_on_init = function(client)
@@ -71,7 +71,7 @@ Util.lsp_on_attach = function(client, bufnr)
     ]]
   end
 
-  require("lqf1.mappings").lsp_mappings(bufnr)
+  require("lsp.mappings").lsp_mappings(bufnr)
 end
 
 return Util

@@ -3,7 +3,7 @@ local nvim_lsp = require('lspconfig')
 local nvim_util = require('lspconfig.util')
 local protocol = require'vim.lsp.protocol'
 
-require "lqf1.handlers"
+require "lsp.handlers"
 
 local function get_typescript_server_path(root_dir)
   local project_root = util.find_node_modules_ancestor(root_dir)
@@ -129,7 +129,8 @@ end
 
 -- nvim-cmp setup
 require("plugin.comp").setup()
+require("plugin.telescope").setup()
 
 require("lqf.treesitter")
-require("lqf.telescope")
+-- require("lqf.telescope")
 -- require("lqf.lualine")

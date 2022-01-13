@@ -9,14 +9,17 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'jose-elias-alvarez/null-ls.nvim'
-Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug('tami5/sqlite.lua') " for telescope-frecency
+Plug('nvim-telescope/telescope-frecency.nvim')
+
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils' " let tsserver be good
 
 Plug 'gruvbox-community/gruvbox' " theme
 call plug#end()
 
 runtime! lua/util.lua
-lua require("lqf1")
+lua require("lsp")
 
 let mapleader = " "
 set completeopt=menu,menuone,noselect
