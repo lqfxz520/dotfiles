@@ -74,7 +74,7 @@ M.lsp_mappings = function(bufnr)
     silent = true,
   })
 
-  map(bufnr, "n", "<Leader>gR", "<cmd>lua vim.lsp.buf.rename()<CR>", {
+  map(bufnr, "n", "<Leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>", {
     -- callback = vim.lsp.buf.rename,
     -- desc = "Rename current symbol",
     noremap = true,

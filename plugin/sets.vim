@@ -21,6 +21,7 @@ set noshowmode
 set autoindent      " Use same indenting on new lines
 set smartindent     " Smart autoindenting on new lines
 set clipboard=unnamedplus
+set signcolumn=yes
 
 set scrolloff=3
 set sidescrolloff=5
@@ -30,8 +31,8 @@ set foldlevelstart=99
 set foldmethod=expr  " folding by syntax regions
 set foldexpr=nvim_treesitter#foldexpr()
 
-set showmatch           " Jump to matching bracket
-set matchpairs+=<:>     " Add HTML brackets to pair matching
+" set showmatch           " Jump to matching bracket
+" set matchpairs+=<:>     " Add HTML brackets to pair matching
 set matchtime=1         " Tenths of a second to show the matching paren
 
 set pumheight=15        " Pop-up menu's line height
@@ -43,7 +44,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=50
+set updatetime=500
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
@@ -60,7 +61,7 @@ set synmaxcol=300
 " }}} syntax
 
 " mouse {{{
-set mouse+=a
+set mouse=nv
 set mousehide
 " }}} mouse
 
@@ -71,3 +72,5 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 " }}} guicursor
 
 set jumpoptions=stack
+set completeopt=menu,menuone,noselect
+set formatoptions-=o

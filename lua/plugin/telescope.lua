@@ -1,6 +1,6 @@
 local M = {}
 
-M.no_preview = function (opts)
+local no_preview = function (opts)
     return vim.tbl_extend(
       "force",
       require("telescope.themes").get_dropdown {
@@ -18,6 +18,7 @@ M.no_preview = function (opts)
       opts or {}
     )
 end
+
 M.setup = function()
     local telescope = require "telescope"
     local actions = require "telescope.actions"
@@ -100,11 +101,11 @@ M.setup = function()
                     "dotbot",
                 },
             },
-            lsp_code_actions = M.no_preview(),
-            current_buffer_fuzzy_find = M.no_preview(),
+            lsp_code_actions = no_preview(),
+            current_buffer_fuzzy_find = no_preview(),
         },
         extensions = {
-            -- ["ui-select"] = M.no_preview(),
+            -- ["ui-select"] = no_preview(),
             fzf = {
                 override_generic_sorter = true,
                 override_file_sorter = true,
@@ -129,11 +130,11 @@ M.setup = function()
 
 
     M.frecency = function()
-        telescope.extensions.frecency.frecency(M.no_preview())
+        require('telescope.extensions').frecency.frecency(no_preview())
     end
 
     M.builtins = function()
-        require("telescope.builtin").builtin(M.no_preview())
+        require("telescope.builtin").builtin(no_preview())
     end
 
     M.workspace_symbols = function()
@@ -159,30 +160,48 @@ M.setup = function()
         silent = true,
     })
 
-    map("n", "<C-f>", "<cmd>lua M.grep_prompt()<CR>", {
+    map("n", "<Leader>ps", [[<cmd>lua require("telescope.builtin").grep_string { path_display = { "shorten" }, search = vim.fn.input "Grep String > ", only_sort_text = true, use_regex = true }<CR>]], {
         -- callback = M.grep_prompt,
         -- desc = "Fuzzy grep files using Telescope",
         noremap = true,
         silent = true,
     })
 
-    map("n", "<Leader>ft", "<cmd>lua M.builtins()<CR>", {
+    map("n", "<Leader>pw", [[<cmd>lua require("telescope.builtin").grep_string { path_display = { "shorten" }, search = vim.fn.expand("<cword>") }<CR>]], {
+        -- callback = M.grep_prompt,
+        -- desc = "Fuzzy grep files using Telescope",
+        noremap = true,
+        silent = true,
+    })
+
+    map('n', '<leader>ph', [[<cmd>lua require('telescope.builtin').help_tags()<cr>]], { noremap = true, silent = true })
+
+    map('n', '<leader>pb', [[<cmd>lua require('telescope.builtin').buffers({sort_lastused = true})<CR>]], { noremap = true, silent = true })
+
+    map("n", "<Leader>ft", [[<cmd>lua require("telescope.builtin").builtin()<CR>]], {
         -- callback = M.builtins,
         -- desc = "Fuzzy grep files using Telescope",
         noremap = true,
         silent = true,
     })
 
-    map("n", "<Leader>ff", "<cmd>lua M.frecency()<CR>", {
+    map("n", "<Leader>ff", [[<cmd>lua require('telescope').extensions.frecency.frecency()<CR>]], {
         -- callback = M.frecency,
         -- desc = "File picker using frecency algorithm",
         noremap = true,
         silent = true,
     })
 
-    map("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find<CR>", {
-        callback = require("telescope.builtin").current_buffer_fuzzy_find,
-        desc = "Fuzzy grep current buffer content using Telescope",
+    map("n", "<Leader>fb", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", {
+        -- callback = require("telescope.builtin").current_buffer_fuzzy_find,
+        -- desc = "Fuzzy grep current buffer content using Telescope",
+        noremap = true,
+        silent = true,
+    })
+
+    map("n", "<Leader>wo", [[<cmd>lua require("telescope.builtin").lsp_document_symbols { path_display = { "absolute" } }<CR>]], {
+        -- callback = require("telescope.builtin").current_buffer_fuzzy_find,
+        -- desc = "Fuzzy grep current buffer content using Telescope",
         noremap = true,
         silent = true,
     })
