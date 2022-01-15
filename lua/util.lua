@@ -2,7 +2,7 @@ local fn, api = vim.fn, vim.api
 
 _G.Util = {}
 
-P = function(stuff)
+Util.P = function(stuff)
   print(vim.inspect(stuff))
   return stuff
 end
@@ -72,6 +72,37 @@ Util.lsp_on_attach = function(client, bufnr)
   end
 
   require("lsp.mappings").lsp_mappings(bufnr)
+
+
+  -- local icons = {
+  --     Class = " ",
+  --     Color = " ",
+  --     Constant = " ",
+  --     Constructor = " ",
+  --     Enum = "了 ",
+  --     EnumMember = " ",
+  --     Field = " ",
+  --     File = " ",
+  --     Folder = " ",
+  --     Function = " ",
+  --     Interface = "ﰮ ",
+  --     Keyword = " ",
+  --     Method = "ƒ ",
+  --     Module = " ",
+  --     Property = " ",
+  --     Snippet = "﬌ ",
+  --     Struct = " ",
+  --     Text = " ",
+  --     Unit = " ",
+  --     Value = " ",
+  --     Variable = " ",
+  -- }
+
+  -- local kinds = vim.lsp.protocol.CompletionItemKind
+
+  -- for i, kind in ipairs(kinds) do
+  --     kinds[i] = icons[kind] or kind
+  -- end
 end
 
 return Util

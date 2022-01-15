@@ -59,3 +59,5 @@ require'nvim-tree'.setup {
     require_confirm = true
   }
 }
+
+vim.api.nvim_set_keymap("n", "<Leader>pv", [[<cmd>:NvimTreeFindFileToggle<CR>]], { noremap = true, silent = true })

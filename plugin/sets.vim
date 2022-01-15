@@ -44,7 +44,7 @@ set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=500
+set updatetime=250
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
@@ -73,4 +73,4 @@ set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
 
 set jumpoptions=stack
 set completeopt=menu,menuone,noselect
-set formatoptions-=o
+set formatoptions=jcrql

@@ -1,6 +1,3 @@
-nnoremap <leader>pv :CocCommand explorer<CR>
-nnoremap <leader>pp :CocCommand explorer --position floating<CR>
-nnoremap <Leader><CR> :so <C-R>=<SID>sourceInit()<CR><CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 nnoremap <Leader>rp :resize 100<CR>

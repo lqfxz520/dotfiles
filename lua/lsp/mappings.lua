@@ -60,16 +60,9 @@ M.lsp_mappings = function(bufnr)
     silent = true,
   })
 
-  map(bufnr, "n", "<Leader>vr", "<cmd>lua telescope.lsp_references()<CR>", {
+  map(bufnr, "n", "<Leader>vr", "<cmd>lua require('telescope.builtin').lsp_references()<CR>", {
     -- callback = telescope.lsp_references,
     -- desc = "Find symbol references using telescope",
-    noremap = true,
-    silent = true,
-  })
-
-  map(bufnr, "n", "<Leader>vs", "<cmd>lua M.workspace_symbols()<CR>", {
-    -- callback = M.workspace_symbols,
-    -- desc = "Find workspace symbols using Telescope",
     noremap = true,
     silent = true,
   })

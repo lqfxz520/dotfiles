@@ -1,7 +1,5 @@
 local nvim_lsp = require('lspconfig')
 local nvim_util = require('lspconfig.util')
-local protocol = require'vim.lsp.protocol'
-
 require "lsp.handlers"
 
 local function get_typescript_server_path(root_dir)
@@ -18,9 +16,8 @@ local function get_typescript_server_path(root_dir)
 end
 
 -- Set up completion using nvim_cmp with LSP source
-local capabilities = require('cmp_nvim_lsp').update_capabilities(
-    vim.lsp.protocol.make_client_capabilities()
-)
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 local servers = {
     tsserver = {
@@ -41,7 +38,10 @@ local servers = {
             },
         },
     },
-    html = {}, cssls = {}, volar = {
+    html = {},
+    cssls = {},
+    jsonls = {},
+    volar = {
         init_options = {
             typescript = {
                 serverPath = '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
@@ -54,7 +54,6 @@ local servers = {
   }
     },
     diagnosticls = {
-        on_attach = on_attach,
         filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'vue' },
         init_options = {
             linters = {
@@ -84,6 +83,7 @@ local servers = {
                 javascriptreact = 'eslint',
                 typescript = 'eslint',
                 typescriptreact = 'eslint',
+                vue = 'eslint'
             },
             formatters = {
                 eslint_d = {
@@ -110,6 +110,7 @@ local servers = {
                 typescriptreact = 'prettier',
                 json = 'prettier',
                 markdown = 'prettier',
+                vue = { 'eslint_d', 'prettier' },
             }
         }
     }
@@ -130,10 +131,3 @@ for name, opts in pairs(servers) do
   end
 end
 
--- nvim-cmp setup
-require("plugin.comp").setup()
-require("plugin.telescope").setup()
-
-require("lqf.treesitter")
--- require("lqf.telescope")
--- require("lqf.lualine")
