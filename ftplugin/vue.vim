@@ -6,7 +6,7 @@ setlocal iskeyword+=-
 nnoremap <silent><buffer> ]] :call search('^<\(template\<bar>script\<bar>style\)', 'W')<cr>
 nnoremap <silent><buffer> [[ :call search('^<\(template\<bar>script\<bar>style\)', 'bW')<cr>
 
-let s:dnum = search('\<data()', 'nW')
+let s:dnum = search('\<data()\|\<\(data: () =>\)', 'nW')
 let s:mnum = search('\<methods:', 'nW')
 let s:cnum = search('\<created()', 'nW')
 

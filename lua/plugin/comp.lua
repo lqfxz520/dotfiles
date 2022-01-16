@@ -4,6 +4,7 @@ local cmp = require 'cmp'
 local lspkind = require 'lspkind'
 
 require("luasnip.loaders.from_vscode").lazy_load()
+---@diagnostic disable-next-line: redundant-parameter
 cmp.setup {
     formatting = {
         format = lspkind.cmp_format({
@@ -62,11 +63,11 @@ cmp.setup {
     }
 }
 
--- cmp.setup.cmdline(':', {
---     sources = {
---         { name = 'cmdline' }
---     }
--- })
+cmp.setup.cmdline(':', {
+    sources = {
+        { name = 'path' }
+    }
+})
 
 cmp.setup.cmdline('/', {
   sources = {

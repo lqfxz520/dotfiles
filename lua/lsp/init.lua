@@ -3,12 +3,12 @@ local nvim_util = require('lspconfig.util')
 require "lsp.handlers"
 
 local function get_typescript_server_path(root_dir)
-  local project_root = util.find_node_modules_ancestor(root_dir)
+  local project_root = nvim_util.find_node_modules_ancestor(root_dir)
 
-  local local_tsserverlib = project_root ~= nil and util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js')
+  local local_tsserverlib = project_root ~= nil and nvim_util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js')
   local global_tsserverlib = '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
 
-  if local_tsserverlib and util.path.exists(local_tsserverlib) then
+  if local_tsserverlib and nvim_util.path.exists(local_tsserverlib) then
     return local_tsserverlib
   else
     return global_tsserverlib
@@ -18,6 +18,10 @@ end
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
 
 local servers = {
     tsserver = {
@@ -42,19 +46,18 @@ local servers = {
     cssls = {},
     jsonls = {},
     volar = {
-        init_options = {
-            typescript = {
-                serverPath = '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
+        init_options = {},
+        settings = {
+            volar = {
+                lowPowerMode = true,
             }
         },
-        config = {
-            on_new_config = function(new_config, new_root_dir)
-                new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
-            end,
-  }
+        on_new_config = function(new_config, new_root_dir)
+            new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
+        end,
     },
     diagnosticls = {
-        filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'vue' },
+        filetypes = { 'javascript', 'javascriptreact', 'json', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'markdown', 'vue', 'lua' },
         init_options = {
             linters = {
                 eslint = {
@@ -90,13 +93,16 @@ local servers = {
                     command = 'eslint_d',
                     rootPatterns = { '.git' },
                     args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
-                    rootPatterns = { '.git' },
                 },
                 prettier = {
                     command = 'prettier_d_slim',
                     rootPatterns = { '.git' },
                     -- requiredFiles: { 'prettier.config.js' },
                     args = { '--stdin', '--stdin-filepath', '%filename' }
+                },
+                stylua = {
+                    command = 'stylua',
+                    args = { '-' },
                 }
             },
             formatFiletypes = {
@@ -108,11 +114,35 @@ local servers = {
                 less = 'prettier',
                 typescript = 'prettier',
                 typescriptreact = 'prettier',
-                json = 'prettier',
                 markdown = 'prettier',
                 vue = { 'eslint_d', 'prettier' },
+                lua = 'stylua',
             }
         }
+    },
+    sumneko_lua = {
+        settings = {
+            Lua = {
+                runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = 'LuaJIT',
+                    -- Setup your lua path
+                    path = runtime_path,
+                },
+                diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = {'vim'},
+                },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = vim.api.nvim_get_runtime_file("", true),
+                },
+                -- Do not send telemetry data containing a randomized but unique identifier
+                telemetry = {
+                    enable = false,
+                },
+            },
+        },
     }
 }
 
