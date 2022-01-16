@@ -6,10 +6,9 @@ endif
 let g:gruvbox_invert_selection = 1
 let g:gruvbox_contrast_dark = 'hard'
 
-colorscheme gruvbox-material
 set background=dark
 
-" highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " gray
 highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
@@ -27,3 +26,5 @@ highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
 highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
 highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
 highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
+
+colorscheme gruvbox-material
