@@ -19,23 +19,31 @@ Util.borders = {
   -- { "▏", "FloatBorder" },
 
   -- padding border
-  {"▄", "Bordaa"},
-  {"▄", "Bordaa"},
-  {"▄", "Bordaa"},
-  {"█", "Bordaa"},
-  {"▀", "Bordaa"},
-  {"▀", "Bordaa"},
-  {"▀", "Bordaa"},
-  {"█", "Bordaa"}
+  { "▄", "Bordaa" },
+  { "▄", "Bordaa" },
+  { "▄", "Bordaa" },
+  { "█", "Bordaa" },
+  { "▀", "Bordaa" },
+  { "▀", "Bordaa" },
+  { "▀", "Bordaa" },
+  { "█", "Bordaa" },
 }
 
 Util.lsp_on_init = function(client)
   if
     client.name == "svelte"
     or client.name == "volar"
+    or client.name == "vuels"
     or client.name == "tsserver"
   then
     client.resolved_capabilities.document_formatting = false
+  end
+
+  if client.resolved_capabilities.document_formatting then
+    vim.api.nvim_command [[augroup Format]]
+    vim.api.nvim_command [[autocmd! * <buffer>]]
+    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+    vim.api.nvim_command [[augroup END]]
   end
 
   vim.notify(
@@ -72,37 +80,72 @@ Util.lsp_on_attach = function(client, bufnr)
   end
 
   require("lsp.mappings").lsp_mappings(bufnr)
+end
 
+-- Util.startVolar = function()
+--   require("lspconfig").volar.setup {
+--     cmd = {
+--       "node",
+--       "/usr/local/lib/node_modules/@volar/server/out/index.js",
+--       "--stdio",
+--       "--max-old-space-size=4096",
+--     },
+--     on_new_config = function(new_config, new_root_dir)
+--       new_config.init_options.typescript.serverPath =
+--         get_typescript_server_path(
+--           new_root_dir
+--         )
+--     end,
+--   }
+-- end
 
-  -- local icons = {
-  --     Class = " ",
-  --     Color = " ",
-  --     Constant = " ",
-  --     Constructor = " ",
-  --     Enum = "了 ",
-  --     EnumMember = " ",
-  --     Field = " ",
-  --     File = " ",
-  --     Folder = " ",
-  --     Function = " ",
-  --     Interface = "ﰮ ",
-  --     Keyword = " ",
-  --     Method = "ƒ ",
-  --     Module = " ",
-  --     Property = " ",
-  --     Snippet = "﬌ ",
-  --     Struct = " ",
-  --     Text = " ",
-  --     Unit = " ",
-  --     Value = " ",
-  --     Variable = " ",
-  -- }
-
-  -- local kinds = vim.lsp.protocol.CompletionItemKind
-
-  -- for i, kind in ipairs(kinds) do
-  --     kinds[i] = icons[kind] or kind
-  -- end
+Util.startVetur = function()
+  require("lspconfig").vuels.setup {
+    cmd = { "vls" },
+    on_attach = Util.lsp_on_attach,
+    capabilities = require("cmp_nvim_lsp").update_capabilities(
+      vim.lsp.protocol.make_client_capabilities()
+    ),
+    filetypes = { "vue" },
+    init_options = {
+      config = {
+        css = {},
+        emmet = {},
+        html = {
+          suggest = {},
+        },
+        javascript = {
+          format = {},
+        },
+        stylusSupremacy = {},
+        typescript = {
+          format = {},
+        },
+        vetur = {
+          completion = {
+            autoImport = false,
+            tagCasing = "kebab",
+            useScaffoldSnippets = false,
+          },
+          format = {
+            defaultFormatter = {
+              js = "none",
+              ts = "none",
+            },
+            defaultFormatterOptions = {},
+            scriptInitialIndent = false,
+            styleInitialIndent = false,
+          },
+          useWorkspaceDependencies = false,
+          validation = {
+            script = true,
+            style = true,
+            template = true,
+          },
+        },
+      },
+    },
+  }
 end
 
 return Util

@@ -53,15 +53,16 @@ local servers = {
   html = {},
   cssls = {},
   jsonls = {},
-  volar = {
-    init_options = {},
-    on_new_config = function(new_config, new_root_dir)
-      new_config.init_options.typescript.serverPath =
-        get_typescript_server_path(
-          new_root_dir
-        )
-    end,
-  },
+  -- volar = {
+  --   cmd = { 'node', '/usr/local/lib/node_modules/@volar/server/out/index.js', '--stdio', '--max-old-space-size=4096' },
+  --   init_options = {},
+  --   on_new_config = function(new_config, new_root_dir)
+  --     new_config.init_options.typescript.serverPath =
+  --       get_typescript_server_path(
+  --         new_root_dir
+  --       )
+  --   end,
+  -- },
   diagnosticls = {
     filetypes = {
       "javascript",
@@ -175,6 +176,9 @@ local servers = {
     },
   },
 }
+
+vim.api.nvim_set_keymap('n', '<Leader>sv', '<cmd>lua Util.startVetur()<CR>', { noremap=true })
+vim.api.nvim_set_keymap('n', '<Leader>sd', '<cmd>lua Util.startVolar()<CR>', { noremap=true })
 
 for name, opts in pairs(servers) do
   if type(opts) == "function" then

@@ -22,6 +22,7 @@ Plug 'nvim-telescope/telescope-frecency.nvim'
 Plug 'nvim-telescope/telescope-cheat.nvim'
 Plug 'JoosepAlviste/nvim-ts-context-commentstring', {'branch': 'main'}
 Plug 'windwp/nvim-ts-autotag', {'branch': 'main'}
+Plug 'theHamsta/nvim-treesitter-pairs'
 
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils' " let tsserver be good
 
