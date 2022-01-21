@@ -13,6 +13,11 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'onsails/lspkind-nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring', {'branch': 'main'}
+Plug 'windwp/nvim-ts-autotag', {'branch': 'main'}
+Plug 'andymass/vim-matchup'
+Plug 'windwp/nvim-autopairs'
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -20,9 +25,6 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'tami5/sqlite.lua' " for telescope-frecency
 Plug 'nvim-telescope/telescope-frecency.nvim'
 Plug 'nvim-telescope/telescope-cheat.nvim'
-Plug 'JoosepAlviste/nvim-ts-context-commentstring', {'branch': 'main'}
-Plug 'windwp/nvim-ts-autotag', {'branch': 'main'}
-Plug 'theHamsta/nvim-treesitter-pairs'
 
 Plug 'jose-elias-alvarez/nvim-lsp-ts-utils' " let tsserver be good
 
@@ -30,6 +32,7 @@ Plug 'gruvbox-community/gruvbox' " theme
 Plug 'sainnhe/gruvbox-material'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'akinsho/bufferline.nvim'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -38,7 +41,8 @@ Plug 'tpope/vim-repeat'
 
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua' " explorer
-Plug 'windwp/nvim-autopairs'
+
+Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
 lua vim.lsp.set_log_level('debug')
@@ -46,6 +50,8 @@ lua require('vim.lsp.log').set_format_func(vim.inspect)
 
 let mapleader = " "
 let g:tcomment#filetype#guess_vue = 0
+let g:matchup_matchparen_offscreen
+      \ = {'method': 'popup', 'highlight': 'Normal', 'fullwidth': 1}
 
 runtime! lua/util.lua
 lua require("lsp")

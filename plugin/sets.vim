@@ -31,7 +31,7 @@ set foldlevelstart=99
 set foldmethod=expr  " folding by syntax regions
 set foldexpr=nvim_treesitter#foldexpr()
 
-" set showmatch           " Jump to matching bracket
+set showmatch           " Jump to matching bracket
 " set matchpairs+=<:>     " Add HTML brackets to pair matching
 set matchtime=1         " Tenths of a second to show the matching paren
 

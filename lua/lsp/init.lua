@@ -51,8 +51,45 @@ local servers = {
     },
   },
   html = {},
-  cssls = {},
-  jsonls = {},
+  cssls = {
+    filetypes = { "css", "scss", "less", "vue" },
+  },
+  jsonls = {
+    settings = {
+      json = {
+        schemas = {
+          {
+            fileMatch = { "package.json" },
+            url = "https://json.schemastore.org/package.json",
+          },
+          {
+            fileMatch = { "jsconfig*.json" },
+            url = "https://json.schemastore.org/jsconfig.json",
+          },
+          {
+            fileMatch = { "tsconfig*.json" },
+            url = "https://json.schemastore.org/tsconfig.json",
+          },
+          {
+            fileMatch = {
+              ".prettierrc",
+              ".prettierrc.json",
+              "prettier.config.json",
+            },
+            url = "https://json.schemastore.org/prettierrc.json",
+          },
+          {
+            fileMatch = { ".eslintrc", ".eslintrc.json" },
+            url = "https://json.schemastore.org/eslintrc.json",
+          },
+          {
+            fileMatch = { "nodemon.json" },
+            url = "https://json.schemastore.org/nodemon.json",
+          },
+        },
+      },
+    },
+  },
   -- volar = {
   --   cmd = { 'node', '/usr/local/lib/node_modules/@volar/server/out/index.js', '--stdio', '--max-old-space-size=4096' },
   --   init_options = {},
@@ -125,8 +162,20 @@ local servers = {
           },
         },
         prettier = {
-          command = "prettier_d_slim",
-          rootPatterns = { ".git" },
+          command = "prettier",
+          rootPatterns = {
+            ".prettierrc",
+            ".prettierrc.json",
+            ".prettierrc.toml",
+            ".prettierrc.json",
+            ".prettierrc.yml",
+            ".prettierrc.yaml",
+            ".prettierrc.json5",
+            ".prettierrc.js",
+            ".prettierrc.cjs",
+            "prettier.config.js",
+            "prettier.config.cjs",
+          },
           -- requiredFiles: { 'prettier.config.js' },
           args = { "--stdin", "--stdin-filepath", "%filename" },
         },
@@ -177,8 +226,18 @@ local servers = {
   },
 }
 
-vim.api.nvim_set_keymap('n', '<Leader>sv', '<cmd>lua Util.startVetur()<CR>', { noremap=true })
-vim.api.nvim_set_keymap('n', '<Leader>sd', '<cmd>lua Util.startVolar()<CR>', { noremap=true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<Leader>sv",
+  "<cmd>lua Util.startVetur()<CR>",
+  { noremap = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<Leader>sd",
+  "<cmd>lua Util.startVolar()<CR>",
+  { noremap = true }
+)
 
 for name, opts in pairs(servers) do
   if type(opts) == "function" then
