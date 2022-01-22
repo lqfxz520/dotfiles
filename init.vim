@@ -45,8 +45,8 @@ Plug 'kyazdani42/nvim-tree.lua' " explorer
 Plug 'norcalli/nvim-colorizer.lua'
 call plug#end()
 
-lua vim.lsp.set_log_level('debug')
-lua require('vim.lsp.log').set_format_func(vim.inspect)
+" lua vim.lsp.set_log_level('debug')
+" lua require('vim.lsp.log').set_format_func(vim.inspect)
 
 let mapleader = " "
 let g:tcomment#filetype#guess_vue = 0
