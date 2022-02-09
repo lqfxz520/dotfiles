@@ -43,6 +43,7 @@ Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua' " explorer
 
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'gpanders/editorconfig.nvim'
 call plug#end()
 
 " lua vim.lsp.set_log_level('debug')
