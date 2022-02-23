@@ -1,6 +1,27 @@
-local fn, api = vim.fn, vim.api
+local nvim_util = require "lspconfig.util"
 
 _G.Util = {}
+
+local function get_typescript_server_path(root_dir)
+  local project_root = nvim_util.find_node_modules_ancestor(root_dir)
+
+  local local_tsserverlib = project_root ~= nil
+    and nvim_util.path.join(
+      project_root,
+      "node_modules",
+      "typescript",
+      "lib",
+      "tsserverlibrary.js"
+    )
+  local global_tsserverlib =
+    "/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js"
+
+  if local_tsserverlib and nvim_util.path.exists(local_tsserverlib) then
+    return local_tsserverlib
+  else
+    return global_tsserverlib
+  end
+end
 
 Util.P = function(stuff)
   print(vim.inspect(stuff))
@@ -82,22 +103,22 @@ Util.lsp_on_attach = function(client, bufnr)
   require("lsp.mappings").lsp_mappings(bufnr)
 end
 
--- Util.startVolar = function()
---   require("lspconfig").volar.setup {
---     cmd = {
---       "node",
---       "/usr/local/lib/node_modules/@volar/server/out/index.js",
---       "--stdio",
---       "--max-old-space-size=4096",
---     },
---     on_new_config = function(new_config, new_root_dir)
---       new_config.init_options.typescript.serverPath =
---         get_typescript_server_path(
---           new_root_dir
---         )
---     end,
---   }
--- end
+Util.startVolar = function()
+  require("lspconfig").volar.setup {
+    cmd = {
+      "node",
+      "/usr/local/lib/node_modules/@volar/server/out/index.js",
+      "--stdio",
+      "--max-old-space-size=4096",
+    },
+    on_new_config = function(new_config, new_root_dir)
+      new_config.init_options.typescript.serverPath =
+        get_typescript_server_path(
+          new_root_dir
+        )
+    end,
+  }
+end
 
 Util.startVetur = function()
   require("lspconfig").vuels.setup {

@@ -1,27 +1,5 @@
 local nvim_lsp = require "lspconfig"
-local nvim_util = require "lspconfig.util"
 require "lsp.handlers"
-
-local function get_typescript_server_path(root_dir)
-  local project_root = nvim_util.find_node_modules_ancestor(root_dir)
-
-  local local_tsserverlib = project_root ~= nil
-    and nvim_util.path.join(
-      project_root,
-      "node_modules",
-      "typescript",
-      "lib",
-      "tsserverlibrary.js"
-    )
-  local global_tsserverlib =
-    "/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js"
-
-  if local_tsserverlib and nvim_util.path.exists(local_tsserverlib) then
-    return local_tsserverlib
-  else
-    return global_tsserverlib
-  end
-end
 
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -52,7 +30,7 @@ local servers = {
   },
   html = {},
   cssls = {
-    filetypes = { "css", "scss", "less", "vue" },
+    -- filetypes = { "css", "scss", "less", "vue" },
   },
   jsonls = {
     settings = {
@@ -232,6 +210,7 @@ vim.api.nvim_set_keymap(
   "<cmd>lua Util.startVetur()<CR>",
   { noremap = true }
 )
+
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>sd",
