@@ -95,8 +95,15 @@ local servers = {
     init_options = {
       linters = {
         eslint = {
-          command = "eslint_d",
-          rootPatterns = { ".git" },
+          command = "./node_modules/.bin/eslint",
+          rootPatterns = {
+            ".eslintrc.js",
+            ".eslintrc.cjs",
+            ".eslintrc.yaml",
+            ".eslintrc.yml",
+            ".eslintrc.json",
+            "package.json",
+          },
           debounce = 100,
           args = {
             "--stdin",
@@ -105,14 +112,14 @@ local servers = {
             "--format",
             "json",
           },
-          sourceName = "eslint_d",
+          sourceName = "eslint",
           parseJson = {
             errorsRoot = "[0].messages",
             line = "line",
             column = "column",
             endLine = "endLine",
             endColumn = "endColumn",
-            message = "[eslint] ${message} [${ruleId}]",
+            message = "${message} [${ruleId}]",
             security = "severity",
           },
           securities = {
@@ -131,7 +138,12 @@ local servers = {
       formatters = {
         eslint_d = {
           command = "eslint_d",
-          rootPatterns = { ".git" },
+          rootPatterns = {
+            ".eslintrc",
+            ".eslintrc.js",
+            ".eslintrc.json",
+            "eslint.config.js",
+          },
           args = {
             "--stdin",
             "--stdin-filename",
@@ -140,7 +152,7 @@ local servers = {
           },
         },
         prettier = {
-          command = "prettier",
+          command = "./node_modules/.bin/prettier",
           rootPatterns = {
             ".prettierrc",
             ".prettierrc.json",
@@ -157,6 +169,11 @@ local servers = {
           -- requiredFiles: { 'prettier.config.js' },
           args = { "--stdin", "--stdin-filepath", "%filename" },
         },
+        prettier_eslint = {
+          command = "./node_modules/.bin/prettier-eslint",
+          args = { "--stdin" },
+          rootPatterns = { ".git" },
+        },
         stylua = {
           command = "stylua",
           rootPatterns = { ".git" },
@@ -165,15 +182,15 @@ local servers = {
       },
       formatFiletypes = {
         css = "prettier",
-        javascript = "prettier",
-        javascriptreact = "prettier",
+        javascript = { "prettier", "eslint_d" },
+        javascriptreact = { "prettier", "eslint_d" },
         json = "prettier",
         scss = "prettier",
         less = "prettier",
         typescript = { "prettier", "eslint_d" },
         typescriptreact = { "prettier", "eslint_d" },
         markdown = "prettier",
-        vue = { "eslint_d", "prettier" },
+        vue = { "prettier", "eslint_d" },
         lua = "stylua",
       },
     },
