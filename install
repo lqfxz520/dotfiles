@@ -4,6 +4,7 @@ mkdir -p $XDG_CONFIG_HOME/nvim/after/plugin
 mkdir -p $XDG_CONFIG_HOME/nvim/lua/lqf
 mkdir -p $XDG_CONFIG_HOME/nvim/lua/lsp
 mkdir -p $XDG_CONFIG_HOME/nvim/lua/plugin
+mkdir -p $XDG_CONFIG_HOME/nvim/ftplugin
 mkdir -p $XDG_CONFIG_HOME/tmux/tpm
 
 # link wholesale

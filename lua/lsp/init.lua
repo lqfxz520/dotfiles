@@ -68,16 +68,7 @@ local servers = {
       },
     },
   },
-  -- volar = {
-  --   cmd = { 'node', '/usr/local/lib/node_modules/@volar/server/out/index.js', '--stdio', '--max-old-space-size=4096' },
-  --   init_options = {},
-  --   on_new_config = function(new_config, new_root_dir)
-  --     new_config.init_options.typescript.serverPath =
-  --       get_typescript_server_path(
-  --         new_root_dir
-  --       )
-  --   end,
-  -- },
+  volar = {},
   diagnosticls = {
     filetypes = {
       "javascript",
@@ -95,7 +86,7 @@ local servers = {
     init_options = {
       linters = {
         eslint = {
-          command = "./node_modules/.bin/eslint",
+          command = "eslint_d",
           rootPatterns = {
             ".eslintrc.js",
             ".eslintrc.cjs",
