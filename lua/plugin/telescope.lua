@@ -201,6 +201,18 @@ map(
 
 map(
   "n",
+  "<C-y>",
+  "<cmd>lua require('telescope.builtin').resume()<CR>",
+  {
+    -- callback = require("telescope.builtin").current_buffer_fuzzy_find,
+    -- desc = "Fuzzy grep current buffer content using Telescope",
+    noremap = true,
+    silent = true,
+  }
+)
+
+map(
+  "n",
   "<Leader>wo",
   [[<cmd>lua require("telescope.builtin").lsp_document_symbols { path_display = { "absolute" } }<CR>]],
   {
