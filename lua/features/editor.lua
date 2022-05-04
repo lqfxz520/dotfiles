@@ -54,6 +54,8 @@ local plugins = {
       require('indent_blankline').setup({
         char = '¦',
         buftype_exclude = { 'help', 'nofile', 'nowrite', 'quickfix', 'terminal', 'prompt' },
+        show_current_context = true,
+        show_current_context_start = false,
       })
     end,
   },

@@ -7,9 +7,13 @@ lsp.pre = function()
     local hl = 'DiagnosticSign' .. sign
     vim.fn.sign_define(hl, { text = text, texthl = hl, linehl = '', numhl = '' })
   end
-  vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = 'rounded',
-  })
+  local border_opts = { border = 'rounded', focusable = false, scope = 'line' }
+  local l = vim.lsp
+
+  vim.diagnostic.config({ virtual_text = false, float = border_opts })
+
+  l.handlers['textDocument/signatureHelp'] = l.with(l.handlers.signature_help, border_opts)
+  l.handlers['textDocument/hover'] = l.with(l.handlers.hover, border_opts)
 end
 
 -- lsp diagnostics
