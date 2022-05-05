@@ -1,5 +1,4 @@
 local plugin = require('control.plugin')
-local wk = require('which-key')
 local lsp = require('control.lsp')
 
 ---@class CrowsModule
@@ -78,7 +77,7 @@ local function reset()
     require('plenary.reload').reload_module(m)
   end
   plugin.reset()
-  wk.reset()
+  require('which-key').reset()
   lsp.stop_all_clients()
   vim.cmd('runtime! init.lua')
   load_plugins()

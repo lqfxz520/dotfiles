@@ -105,6 +105,7 @@ local plugins = {
   },
   {
     'gelguy/wilder.nvim',
+    opt = true,
     config = function()
       local wilder = require('wilder')
       wilder.setup({
