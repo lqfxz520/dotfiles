@@ -40,14 +40,13 @@ format.plugins = {
       --   pattern = table.concat(fmt.by_lsp, ','),
       --   callback = vim.lsp.buf.formatting_seq_sync,
       -- })
-      vim.api.nvim_create_autocmd('BufWritePost', {
+      vim.api.nvim_create_autocmd('BufWritePre', {
         group = group,
-        pattern = '*',
-        command = 'silent! EslintFixAll'
+        pattern = '*.tsx,*.ts,*.jsx,*.js,*vue',
+        command = 'silent! EslintFixAll',
       })
     end,
   },
 }
 
 return format
-
