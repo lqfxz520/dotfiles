@@ -58,6 +58,7 @@ format.plugins = {
               '.prettierrc.js',
               'prettier.config.js',
               'prettier.config.cjs',
+              'package.json',
             }),
           }),
           diagnostics.eslint_d.with({
