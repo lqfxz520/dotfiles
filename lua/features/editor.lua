@@ -40,6 +40,14 @@ editor.pre = function()
     pattern = 'lua,javascript,typescript,javascriptreact,typescriptreact,html,css,scss,xml,yaml,json,vue',
     command = 'setlocal expandtab ts=2 sw=2 sts=2',
   })
+  local highlight_yank = vim.api.nvim_create_augroup('highlightYank', {})
+  vim.api.nvim_create_autocmd('TextYankPost', {
+    group = highlight_yank,
+    pattern = '*',
+    callback = function()
+      require('vim.highlight').on_yank({ timeout = 40 })
+    end,
+  })
 end
 
 local plugins = {
@@ -64,37 +72,42 @@ local plugins = {
     after = { 'nvim-cmp', 'nvim-treesitter' },
     config = function()
       local npairs = require('nvim-autopairs')
-      local Rule   = require('nvim-autopairs.rule')
+      local Rule = require('nvim-autopairs.rule')
 
       npairs.setup({
         check_ts = true,
         fast_wrap = {},
       })
-      npairs.add_rules {
-        Rule(' ', ' ')
-          :with_pair(function (opts)
-            local pair = opts.line:sub(opts.col - 1, opts.col)
-            return vim.tbl_contains({ '()', '[]', '{}' }, pair)
-          end),
+      npairs.add_rules({
+        Rule(' ', ' '):with_pair(function(opts)
+          local pair = opts.line:sub(opts.col - 1, opts.col)
+          return vim.tbl_contains({ '()', '[]', '{}' }, pair)
+        end),
         Rule('( ', ' )')
-          :with_pair(function() return false end)
+          :with_pair(function()
+            return false
+          end)
           :with_move(function(opts)
             return opts.prev_char:match('.%)') ~= nil
           end)
           :use_key(')'),
         Rule('{ ', ' }')
-          :with_pair(function() return false end)
+          :with_pair(function()
+            return false
+          end)
           :with_move(function(opts)
             return opts.prev_char:match('.%}') ~= nil
           end)
           :use_key('}'),
         Rule('[ ', ' ]')
-          :with_pair(function() return false end)
+          :with_pair(function()
+            return false
+          end)
           :with_move(function(opts)
             return opts.prev_char:match('.%]') ~= nil
           end)
-          :use_key(']')
-      }
+          :use_key(']'),
+      })
       -- If you want insert `(` after select function or method item
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       local cmp = require('cmp')
@@ -144,8 +157,14 @@ local plugins = {
 editor.plugins = plugins
 editor.post = function()
   local wk = require('which-key')
-  wk.register({ ['w!!'] = { 'w !sudo tee %', 'Save as sudo', mode = 'c' } })
-  wk.register({ ['<leader>gs'] = { ':G<CR>', 'Open git pane' } })
+  wk.register({
+    ['w!!'] = { 'w !sudo tee %', 'Save as sudo', mode = 'c' },
+    ['<leader>'] = {
+      ['gs'] = { ':G<CR>', 'Open git pane' },
+      ['gh'] = { ':diffget //3<CR>', 'rebase right box' },
+      ['gu'] = { ':diffget //2<CR>', 'rebase left box' },
+    },
+  })
 end
 
 return editor

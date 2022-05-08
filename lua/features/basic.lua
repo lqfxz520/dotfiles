@@ -58,6 +58,11 @@ basic.post = function()
     ['Q'] = { ':q<CR>', 'Exit current buffer' },
     ['<A-s>'] = { ':w<CR>', 'Save file' },
     ['<C-K>'] = { termcode([[<C-\><C-N>]]), 'To normal mode in terminal', mode = 't' },
+    ['<leader>p'] = { '"_dP', 'Paste no effect', mode = 'v' },
+    ['J'] = { ":m '>+1<CR>gv=gv", 'move line to up', mode = 'v' },
+    ['K'] = { ":m '<-2<CR>gv=gv", 'move line to bottom', mode = 'v' },
+    ['>'] = { '>gv', 'indent right line', mode = 'v' },
+    ['<'] = { '<gv', 'indent left line', mode = 'v' },
     ['<leader>'] = {
       ['h'] = { '<C-W>h', 'Navigator window left' },
       ['j'] = { '<C-W>j', 'Navigator window top' },
@@ -65,8 +70,11 @@ basic.post = function()
       ['l'] = { '<C-W>l', 'Navigator window right' },
       ['~'] = { ':terminal<CR>', 'Open terminal in current window' },
       ['Y'] = { 'gg"+yG', 'Copy content of file' },
-      ['d'] = { '"_d', 'Delete content', mode = 'v' },
+      ['d'] = { '"_d', 'Delete content', mode = 'n' },
     },
+  })
+  wk.register({
+    ['<leader>d'] = { '"_d', 'Delete content', mode = 'v' },
   })
 end
 
