@@ -55,6 +55,7 @@ local plugins = {
   'kshenoy/vim-signature', -- display sign for marks
   'mg979/vim-visual-multi', -- multi select and edit
   'machakann/vim-sandwich', -- surround edit
+  'gpanders/editorconfig.nvim', -- .editorconfig
   {
     'lukas-reineke/indent-blankline.nvim', -- indent hint
     event = 'BufRead',

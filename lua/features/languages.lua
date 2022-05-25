@@ -181,6 +181,7 @@ local typescript = {
     lsp.set_config('graphql', {
       filetypes = { 'graphql' },
     })
+    -- lsp.set_config('eslint', {})
   end,
 }
 
