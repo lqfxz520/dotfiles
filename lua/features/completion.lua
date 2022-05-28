@@ -6,23 +6,23 @@ local plugins = {
   { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
   { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
   { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-  { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' },
-  { 'hrsh7th/vim-vsnip', after = 'nvim-cmp' },
-  { 'rafamadriz/friendly-snippets', after = 'nvim-cmp' },
+  { 'L3MON4D3/LuaSnip', after = 'nvim-cmp' },
+  { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+  { 'rafamadriz/friendly-snippets' },
   {
     'hrsh7th/nvim-cmp',
     after = 'lspkind-nvim',
+    want = 'rafamadriz/friendly-snippets',
     config = function()
       local cmp = require('cmp')
       local lspkind = require('lspkind')
-      local feedkey = function(key, mode)
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-      end
+      local luasnip = require('luasnip')
+      require('luasnip.loaders.from_vscode').lazy_load()
       local function tab(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif vim.fn['vsnip#available'](1) == 1 then
-          feedkey('<Plug>(vsnip-expand-or-jump)', '')
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
         else
           fallback()
         end
@@ -30,8 +30,8 @@ local plugins = {
       local function s_tab(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif vim.fn['vsnip#available'](1) == 1 then
-          feedkey('<Plug>(vsnip-expand-or-jump)', '')
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
         else
           fallback()
         end
@@ -49,7 +49,7 @@ local plugins = {
             mode = 'symbol_text',
             menu = {
               buffer = '[Buffer]',
-              vsnip = '[Vsnip]',
+              luasnip = '[LuaSnip]',
               nvim_lsp = '[LSP]',
               path = '[Path]',
             },
@@ -57,24 +57,20 @@ local plugins = {
         },
         snippet = {
           expand = function(args)
-            vim.fn['vsnip#anonymous'](args.body)
+            luasnip.lsp_expand(args.body)
           end,
         },
         mapping = {
           ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
+          ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
           ['<C-e>'] = cmp.mapping.close(),
           ['<C-y>'] = cmp.mapping({
-            c = cmp.mapping.confirm({
-              select = true,
-              behavior = cmp.ConfirmBehavior.Replace,
-            }),
+            c = cmp.mapping.confirm({ select = true }),
           }),
           ['<CR>'] = cmp.mapping({
-            i = cmp.mapping.confirm({
-              select = true,
-              behavior = cmp.ConfirmBehavior.Replace,
-            }),
+            i = cmp.mapping.confirm({ select = true }),
             c = function(fallback)
               fallback()
             end,
@@ -82,9 +78,9 @@ local plugins = {
           ['<Tab>'] = cmp.mapping({ i = tab }),
           ['<S-Tab>'] = cmp.mapping({ i = s_tab }),
         },
-        sources = {
+        sources = cmp.config.sources({
           { name = 'nvim_lsp' },
-          { name = 'vsnip' },
+          { name = 'luasnip' },
           { name = 'path' },
           {
             name = 'buffer',
@@ -99,13 +95,13 @@ local plugins = {
               end,
             },
           },
-        },
+        }),
       })
     end,
   },
   {
     'gelguy/wilder.nvim',
-    opt = true,
+    opt = false,
     config = function()
       local wilder = require('wilder')
       wilder.setup({

@@ -36,11 +36,7 @@ format.plugins = {
       local lsp_formatting = function(bufnr)
         vim.lsp.buf.format({
           bufnr = bufnr,
-          filter = function(clients)
-            return vim.tbl_filter(function(client)
-              return client.name == 'null-ls'
-            end, clients)
-          end,
+          name = 'null-ls',
         })
       end
       local condition = function(files)
