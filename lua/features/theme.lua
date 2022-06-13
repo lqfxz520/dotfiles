@@ -83,7 +83,7 @@ local themes = {
   },
 }
 
-local used_theme = themes.nord
+local used_theme = themes.gruvbox_dark
 
 theme.pre = function()
   vim.opt.termguicolors = true -- true color

@@ -56,6 +56,7 @@ local plugins = {
   'mg979/vim-visual-multi', -- multi select and edit
   'machakann/vim-sandwich', -- surround edit
   'gpanders/editorconfig.nvim', -- .editorconfig
+  'mbbill/undotree',
   {
     'lukas-reineke/indent-blankline.nvim', -- indent hint
     event = 'BufRead',
@@ -165,6 +166,7 @@ editor.post = function()
       ['gh'] = { ':diffget //3<CR>', 'rebase right box' },
       ['gu'] = { ':diffget //2<CR>', 'rebase left box' },
     },
+    ['<leader>u'] = { ':UndotreeShow<CR>', 'checkout change record' },
   })
 end
 
