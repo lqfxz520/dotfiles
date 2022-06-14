@@ -45,6 +45,14 @@ basic.plugins = {
       })
     end,
   },
+  {
+    'stevearc/dressing.nvim', -- improve vim select/input UI
+    config = function()
+      require('dressing').setup({
+        input = { winblend = 0 },
+      })
+    end,
+  }
 }
 
 basic.post = function()

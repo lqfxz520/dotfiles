@@ -87,7 +87,6 @@ local used_theme = themes.gruvbox_dark
 
 theme.pre = function()
   vim.opt.termguicolors = true -- true color
-  theme.palette = used_theme.palette
 end
 
 theme.plugins = {
@@ -99,5 +98,6 @@ theme.plugins = {
 
 theme.post = function()
   used_theme.apply()
+  theme.palette = used_theme.palette
 end
 return theme

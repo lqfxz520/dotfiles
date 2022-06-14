@@ -3,14 +3,17 @@ local completion = {}
 
 local plugins = {
   { 'onsails/lspkind-nvim', event = 'VimEnter' },
-  { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-  { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-  { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-  { 'L3MON4D3/LuaSnip', after = 'nvim-cmp' },
-  { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
-  { 'rafamadriz/friendly-snippets' },
   {
     'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      -- snippets
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+      'rafamadriz/friendly-snippets',
+    },
     after = 'lspkind-nvim',
     want = 'rafamadriz/friendly-snippets',
     config = function()
@@ -97,6 +100,12 @@ local plugins = {
           },
         }),
       })
+    end,
+  },
+  {
+    'hrsh7th/cmp-nvim-lsp',
+    config = function()
+      require('control.lsp').add_caps_setter(require('cmp_nvim_lsp').update_capabilities)
     end,
   },
   {

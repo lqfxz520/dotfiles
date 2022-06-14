@@ -10,6 +10,7 @@
 
 ---@alias LspKeyMappers table<string, LspKeyMapper>
 ---@alias OnAttachFn function(client:table,bufnr:number)
+---@alias CapsSetter function(caps:table):table
 
 -- local opts = { noremap=true, silent=true }
 
@@ -43,6 +44,7 @@ local lsp = {
     -- format = { '<leader>f', vim.lsp.buf.formatting, 'Format buffer' },
   },
   on_attaches = {},
+  caps_setters = {},
 }
 
 ---set lsp function of the key
@@ -92,18 +94,22 @@ local function on_attach(client, bufnr)
   end
 end
 
+---add a capabilities setter
+---@param setter CapsSetter
+function lsp.add_caps_setter(setter)
+  lsp.caps_setters[#lsp.caps_setters + 1] = setter
+end
+
 local function capabilities()
   local caps = vim.lsp.protocol.make_client_capabilities()
   caps.textDocument.completion.completionItem.snippetSupport = true
   caps.textDocument.completion.completionItem.resolveSupport = {
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
-  local exists, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-  if exists then
-    return cmp_nvim_lsp.update_capabilities(caps)
-  else
-    return caps
+  for _, setter in ipairs(lsp.caps_setters) do
+    caps = setter(caps)
   end
+  return caps
 end
 
 ---set lsp config

@@ -17,7 +17,7 @@ lsp.pre = function()
 end
 
 -- lsp diagnostics
-lsp.plugins[1] = {
+lsp.plugins[#lsp.plugins+1] = {
   'folke/trouble.nvim',
   requires = 'kyazdani42/nvim-web-devicons',
   config = function()
@@ -38,7 +38,7 @@ lsp.plugins[1] = {
 }
 
 -- function signature hint
-lsp.plugins[2] = {
+lsp.plugins[#lsp.plugins + 1] = {
   'ray-x/lsp_signature.nvim',
   config = function()
     require('control.lsp').add_on_attach(function(_, _)
@@ -47,28 +47,6 @@ lsp.plugins[2] = {
         handler_opts = { border = 'rounded' },
       })
     end)
-  end,
-}
-
--- lsp ui extension
-lsp.plugins[3] = {
-  'RishabhRD/lspactions',
-  requires = {
-    { 'nvim-lua/plenary.nvim' },
-    { 'nvim-lua/popup.nvim' },
-  },
-  config = function()
-    local lspactions = require('lspactions')
-    vim.ui.select = lspactions.select
-    vim.ui.input = lspactions.input
-    vim.lsp.handlers['textDocument/codeAction'] = lspactions.codeaction
-    vim.lsp.handlers['textDocument/references'] = lspactions.references
-    vim.lsp.handlers['textDocument/definition'] = lspactions.definition
-    vim.lsp.handlers['textDocument/declaration'] = lspactions.declaration
-    vim.lsp.handlers['textDocument/implementation'] = lspactions.implementation
-    local lsputil = require('control.lsp')
-    lsputil.set_key_cmd(lsputil.buffer_keys.rename, lspactions.rename)
-    lsputil.set_key_cmd(lsputil.buffer_keys.code_action, lspactions.code_action)
   end,
 }
 
