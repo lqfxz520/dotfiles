@@ -41,11 +41,11 @@ lsp.plugins[#lsp.plugins+1] = {
 lsp.plugins[#lsp.plugins + 1] = {
   'ray-x/lsp_signature.nvim',
   config = function()
-    require('control.lsp').add_on_attach(function(_, _)
+    require('control.lsp').add_on_attach(function(_, bufnr)
       require('lsp_signature').on_attach({
         bind = true,
         handler_opts = { border = 'rounded' },
-      })
+      }, bufnr)
     end)
   end,
 }
