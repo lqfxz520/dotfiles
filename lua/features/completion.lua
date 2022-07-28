@@ -2,10 +2,11 @@
 local completion = {}
 
 local plugins = {
-  { 'onsails/lspkind-nvim', event = 'VimEnter' },
+  { 'onsails/lspkind-nvim' },
   {
     'hrsh7th/nvim-cmp',
     requires = {
+      'onsails/lspkind-nvim',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
@@ -14,13 +15,12 @@ local plugins = {
       'saadparwaiz1/cmp_luasnip',
       'rafamadriz/friendly-snippets',
     },
-    after = 'lspkind-nvim',
     want = 'rafamadriz/friendly-snippets',
     config = function()
       local cmp = require('cmp')
       local lspkind = require('lspkind')
       local luasnip = require('luasnip')
-      require('luasnip.loaders.from_vscode').lazy_load()
+      -- require('luasnip.loaders.from_vscode').lazy_load()
       local function tab(fallback)
         if cmp.visible() then
           cmp.select_next_item()

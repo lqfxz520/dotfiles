@@ -151,7 +151,7 @@ local typescript = {
 
       local local_tsserverlib = project_root ~= nil
         and util.path.join(project_root, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js')
-      local global_tsserverlib = '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
+      local global_tsserverlib = '/home/loose/personalConfig/nvm/versions/node/v16.14.1/lib/node_modules/typescript/lib/tsserverlibrary.js'
 
       if local_tsserverlib and util.path.exists(local_tsserverlib) then
         return local_tsserverlib
@@ -170,14 +170,14 @@ local typescript = {
       root_dir = util.root_pattern('tailwind.config.js', 'tailwind.config.ts'),
     })
 
-    lsp.set_config('denols', {
-      root_dir = util.root_pattern('deno_root'),
-      init_options = {
-        enable = true,
-        lint = true,
-        unstable = true,
-      },
-    })
+    -- lsp.set_config('denols', {
+    --   root_dir = util.root_pattern('deno_root'),
+    --   init_options = {
+    --     enable = true,
+    --     lint = true,
+    --     unstable = true,
+    --   },
+    -- })
     lsp.set_config('graphql', {
       filetypes = { 'graphql' },
     })
@@ -202,6 +202,13 @@ local yaml = {
   end,
 }
 
+---@type Feature
+local html = {
+  post = function()
+    lsp.set_config('html', {})
+  end,
+}
+
 ---@type Feature[]
 return {
   go,
@@ -211,4 +218,5 @@ return {
   typescript,
   viml,
   yaml,
+  html,
 }

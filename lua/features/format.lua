@@ -34,9 +34,13 @@ format.plugins = {
       local group = vim.api.nvim_create_augroup('format_on_save', {})
       -- only null-ls formatters are applied
       local lsp_formatting = function(bufnr)
+        -- vim.lsp.buf.formatting_sync(nil, 2000)
         vim.lsp.buf.format({
+          filter = function(client)
+            -- apply whatever logic you want (in this example, we'll only use null-ls)
+            return client.name == "null-ls"
+          end,
           bufnr = bufnr,
-          name = 'null-ls',
         })
       end
       local condition = function(files)
@@ -49,6 +53,7 @@ format.plugins = {
           formatting.stylua,
           formatting.prettier.with({
             condition = condition({
+              'package.json',
               '.prettierrc',
               '.prettierrc.json',
               '.prettierrc.js',
