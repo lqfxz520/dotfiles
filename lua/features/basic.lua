@@ -18,6 +18,7 @@ basic.pre = function()
   vim.opt.sidescrolloff = 5
   vim.opt.colorcolumn = '80'
   vim.opt.mouse = 'nv'
+  vim.opt.updatetime = 100
   vim.opt.termguicolors = true -- true color
 end
 
@@ -34,7 +35,7 @@ basic.plugins = {
       local wk = require('which-key')
       vim.opt.sessionoptions = 'curdir,folds,help,tabpages,terminal,winsize'
       require('auto-session').setup({
-        pre_save_cmds = { 'NvimTreeClose' },
+        pre_save_cmds = { 'NeoTreeClose' },
         auto_session_suppress_dirs = { '~' },
       })
       wk.register({
@@ -52,7 +53,11 @@ basic.plugins = {
         input = { winblend = 0 },
       })
     end,
-  }
+  },
+  {
+    'kevinhwang91/nvim-bqf', -- improve vim quickfix UI
+    ft = 'qf',
+  },
 }
 
 basic.post = function()

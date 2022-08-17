@@ -5,7 +5,7 @@ local function set_filetype()
   vim.cmd([[filetype on]])
   vim.cmd([[filetype plugin on]])
   vim.g.do_filetype_lua = 1
-  vim.g.did_load_filetypes = 1
+  -- vim.g.did_load_filetypes = 1
   local filetypes = {
     ['*html'] = 'html',
     ['tsconfig.json'] = 'jsonc',
@@ -22,7 +22,9 @@ end
 editor.pre = function()
   vim.cmd('syntax enable')
   vim.opt.foldmethod = 'expr'
-  vim.opt.foldlevelstart = 99
+  vim.opt.foldlevelstart = -1
+  vim.opt.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+  vim.opt.foldenable = true
   -- ignore file for all
   vim.cmd('set wildignore+=*/node_modules/*,*.swp,*.pyc,*/venv/*,*/target/*,.DS_Store')
 
@@ -48,6 +50,18 @@ editor.pre = function()
       require('vim.highlight').on_yank({ timeout = 40 })
     end,
   })
+  local setft = vim.api.nvim_create_augroup('setft', {})
+  vim.api.nvim_create_autocmd(
+      { 'BufRead', 'BufNewFile' },
+      {
+          group = setft,
+          pattern = '*',
+          callback = function ()
+              local buf = vim.api.nvim_win_get_buf(0)
+              vim.bo[buf].filetype=vim.filetype.match({buf=buf})
+          end
+      }
+  )
 end
 
 local plugins = {
@@ -57,6 +71,24 @@ local plugins = {
   'machakann/vim-sandwich', -- surround edit
   'gpanders/editorconfig.nvim', -- .editorconfig
   'mbbill/undotree',
+  {
+    'heavenshell/vim-jsdoc',
+    ft = { 'javascript', 'javascript.jsx', 'typescript', 'vue' },
+    run = 'make install',
+    config = function ()
+      local wk = require('which-key')
+      wk.register({
+        ['w!!'] = { 'w !sudo tee %', 'Save as sudo', mode = 'c' },
+        ['<leader>'] = {
+          ['gs'] = { ':G<CR>', 'Open git pane' },
+          ['gh'] = { ':diffget //3<CR>', 'rebase right box' },
+          ['gu'] = { ':diffget //2<CR>', 'rebase left box' },
+        },
+        ['<leader>u'] = { ':UndotreeShow<CR>', 'checkout change record' },
+        ['<leader>gc'] = { ':JsDoc<CR>', 'add jsdoc' },
+      })
+    end
+  },
   {
     'lukas-reineke/indent-blankline.nvim', -- indent hint
     event = 'BufRead',
@@ -71,7 +103,7 @@ local plugins = {
   },
   {
     'windwp/nvim-autopairs', -- autopairs
-    after = { 'nvim-cmp', 'nvim-treesitter' },
+    requires = { 'hrsh7th/nvim-cmp' },
     config = function()
       local npairs = require('nvim-autopairs')
       local Rule = require('nvim-autopairs.rule')
@@ -117,17 +149,20 @@ local plugins = {
     end,
   },
   {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    after = 'nvim-treesitter',
+    'kevinhwang91/nvim-ufo',
+    requires = 'kevinhwang91/promise-async'
   },
-  {
-    'andymass/vim-matchup',
-    after = 'nvim-treesitter',
-  },
+  'JoosepAlviste/nvim-ts-context-commentstring',
+  'andymass/vim-matchup',
   {
     'nvim-treesitter/nvim-treesitter', -- treesitter
-    event = 'BufRead',
     run = ':TSUpdate',
+    requires = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      'andymass/vim-matchup',
+      'kevinhwang91/nvim-ufo',
+      'windwp/nvim-autopairs',
+    },
     config = function()
       require('nvim-treesitter.configs').setup({
         ensure_installed = 'all',
@@ -137,8 +172,12 @@ local plugins = {
         context_commentstring = { enable = true },
         indent = { enable = true },
       })
-      vim.fn['nvim_treesitter#foldexpr']()
       vim.g.matchup_matchparen_offscreen = { method = 'popup', highlight = 'Normal', fullwidth = 1 }
+      require('ufo').setup({
+        provider_selector = function()
+        return {'treesitter', 'indent'}
+      end
+      })
     end,
   },
   'tpope/vim-fugitive', -- git management

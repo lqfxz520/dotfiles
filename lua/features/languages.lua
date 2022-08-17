@@ -209,6 +209,13 @@ local html = {
   end,
 }
 
+---@type Feature
+local cssls = {
+  post = function()
+    lsp.set_config('cssls', {})
+  end,
+}
+
 ---@type Feature[]
 return {
   go,
@@ -219,4 +226,5 @@ return {
   viml,
   yaml,
   html,
+  cssls,
 }
