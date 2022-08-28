@@ -25,6 +25,7 @@ local file_explorer = {
 
 file_explorer.plugins[#file_explorer.plugins + 1] = {
   'nvim-neo-tree/neo-tree.nvim',
+  branch = 'v2.x',
   requires = {
     'nvim-lua/plenary.nvim',
     'kyazdani42/nvim-web-devicons', -- not strictly required, but recommended
@@ -33,6 +34,7 @@ file_explorer.plugins[#file_explorer.plugins + 1] = {
   config = function()
     require('neo-tree').setup({
       close_if_last_window = true,
+      follow_current_file = true,
       source_selector = {
         winbar = true,
         statusline = false,
@@ -61,8 +63,7 @@ file_explorer.plugins[#file_explorer.plugins + 1] = {
             local node = state.tree:get_node()
             local path = node:get_id()
             -- open file in default application in the background
-            local f = io.popen('wslpath -w ~')
-            print(f:read("*a"))
+            vim.fn.system('/mnt/c/WINDOWS/explorer.exe | wslpath -w ' .. path)
             -- vim.api.nvim_command('!/mnt/c/WINDOWS/explorer.exe | wslpath -w' .. path)
           end,
         },
